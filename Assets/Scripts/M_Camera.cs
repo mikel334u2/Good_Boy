@@ -11,11 +11,8 @@ public class M_Camera : MonoBehaviour
     public float minTilt = -80;
     public float maxTilt = 80;
     public float camDist = 10;
+    public float sensitivity = 180;
     public bool isRotatable = true;
-    public bool isRotatableX = true;
-    public bool isRotatableY = true;
-    public float SensitivityX = 1f;
-    public float SensitivityY = 1f;
 
     // camera should always move after the player moves
     // LateUpdate is called after update
@@ -24,7 +21,8 @@ public class M_Camera : MonoBehaviour
         // Move The camera with the mouse
         if (isRotatable)
         {
-            handleInput();
+            heading += Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
+            tilt += Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
         }
         
         // Only allow values between -80 and 80 for the tilt
@@ -35,19 +33,5 @@ public class M_Camera : MonoBehaviour
 
         // set the camera position
         transform.position = player.position - transform.forward * camDist + Vector3.up * playerHeight;
-    }
-
-    private void handleInput()
-    {
-        if (isRotatableX)
-        {
-            heading += Input.GetAxis("Mouse X") * Time.deltaTime * 180 * SensitivityX;
-            heading += Input.GetAxis("RHorizontal") * Time.deltaTime * 180 * SensitivityX;
-        }
-        if (isRotatableY)
-        {
-            tilt += Input.GetAxis("Mouse Y") * Time.deltaTime * 180 * SensitivityY;
-            tilt += Input.GetAxis("RVertical") * Time.deltaTime * 180 *SensitivityY;
-        }
     }
 }
