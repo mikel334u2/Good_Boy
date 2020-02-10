@@ -11,7 +11,6 @@ public class M_Camera : MonoBehaviour
     public float minTilt = -80;
     public float maxTilt = 80;
     public float camDist = 10;
-    public float sensitivity = 180;
     public bool isRotatable = true;
 
     // camera should always move after the player moves
@@ -21,8 +20,8 @@ public class M_Camera : MonoBehaviour
         // Move The camera with the mouse
         if (isRotatable)
         {
-            heading += Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
-            tilt += Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
+            heading += Input.GetAxis("Mouse X") * Time.deltaTime * 180;
+            tilt += Input.GetAxis("Mouse Y") * Time.deltaTime * 180;
         }
         
         // Only allow values between -80 and 80 for the tilt
