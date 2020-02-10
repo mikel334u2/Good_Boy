@@ -16,7 +16,7 @@ using UnityEngine;
  */
 
 // A Simple 3D Player Controller script that uses Unity's PlayerController component
-public class M_PlayerController : MonoBehaviour
+public class TEST_M_PlayerController : MonoBehaviour
 {
     // Objects
     CharacterController controller;
@@ -141,7 +141,7 @@ public class M_PlayerController : MonoBehaviour
         {
             velocity.y -= grav * Time.deltaTime;
         }
-        velocity.y = Mathf.Clamp(velocity.y, -10, 10);
+        velocity.y = Mathf.Clamp(velocity.y, -100, 100);
     }
 
     // Jump, by using the velocity we have set up
