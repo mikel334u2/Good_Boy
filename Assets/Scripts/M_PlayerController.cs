@@ -52,9 +52,9 @@ public class M_PlayerController : MonoBehaviour
     [HideInInspector]
     public bool zeroMovement = false;
     
-    public bool Sprint;
-   
-    private void Start()
+    public bool sprint;
+    
+    private void Start() 
     {
         // load the CharacterController attatched to this object
         controller = GetComponent<CharacterController>();
@@ -63,8 +63,8 @@ public class M_PlayerController : MonoBehaviour
             Debug.Log("Add an Animator to your player");
         }
     }
-    
-    private void Update() 
+   
+    private void Update()
     {
         DoInput();
         CalculateCamera();
@@ -80,14 +80,11 @@ public class M_PlayerController : MonoBehaviour
 
         HandleMovement();
         // Debug.Log(velocity);
-    
-    if (Input.GetButtonDown("Sprint"))
-            {
-        	 Sprint = true;
-            }
-    
-    
-    
+        
+        if (Input.GetButtonDown("Sprint")){
+        	sprint = true;
+        } animator.SetBool("Sprint", sprint); //TEST does not fully work, as Sprint as no deactivtion
+        
     }
 
     // Stores the input for later use
@@ -169,9 +166,8 @@ public class M_PlayerController : MonoBehaviour
         // and Linearly Interpolate based off of rotation (start moving slower and then speed up)
         // then we can add the y velocity back in
         velocityXZ = Vector3.Lerp(velocityXZ, forward * input.magnitude * speed, acceleration* Time.deltaTime);
-        velocity = new Vector3(velocityXZ.x, velocity.y, velocityXZ.z);              
+        velocity = new Vector3(velocityXZ.x, velocity.y, velocityXZ.z);
     }
-    
 
     // apply gravity, but only speed up when we are not grounded
     void DoGravity()
@@ -188,7 +184,7 @@ public class M_PlayerController : MonoBehaviour
                 doRaycast = true;
             }
         }
-        velocity.y = Mathf.Clamp(velocity.y, -10, 10);
+        velocity.y = Mathf.Clamp(velocity.y, -100, 100);
     }
 
     // Jump, by using the velocity we have set up

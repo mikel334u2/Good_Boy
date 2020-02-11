@@ -43,11 +43,19 @@ public class TEST_M_PlayerController : MonoBehaviour
     // Gravity
     public float grav = 9.81f;
     public bool grounded = false;
+    
+    public bool Sprint;
+	public bool Move_Input;
+	public bool isjumping;
 
     private void Start() 
     {
         // load the CharacterController attatched to this object
         controller = GetComponent<CharacterController>();
+   /*     
+        animator.SetBool("Sprint", Sprint);
+        animator.SetBool("Move_Input", Move_Input);
+        animator.SetBool("isjumping", isjumping);*/
     }
     private void Update() 
     {
@@ -59,6 +67,14 @@ public class TEST_M_PlayerController : MonoBehaviour
         DoJump();
 
         controller.Move(velocity * Time.deltaTime);
+        
+        	//start of test
+		if (Input.GetButtonDown("Sprint")) {
+			Sprint = true;
+			 
+		}
+		
+		//end of test
     }
 
     // Stores the input for later use
@@ -118,6 +134,7 @@ public class TEST_M_PlayerController : MonoBehaviour
         {
             Quaternion rot = Quaternion.LookRotation(intent);
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, turnSpeed * Time.deltaTime);
+            Move_Input = true;  //animator TEST
         }
         
         // seperate out the y component of velocity so that it does not affect our XZ movement
@@ -153,6 +170,7 @@ public class TEST_M_PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 velocity.y = jumpVelocity;
+                isjumping = true;
             }
         }
     }
