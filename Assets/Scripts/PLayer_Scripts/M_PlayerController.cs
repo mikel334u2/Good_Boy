@@ -33,7 +33,7 @@ public class M_PlayerController : MonoBehaviour
     Vector3 intent;
     Vector3 velocity;
     Vector3 velocityXZ;
-    public float speed = 5f;
+    public float speed = 10f;
     public float jumpVelocity = 10;
     public float acceleration = 11;
     float turnSpeed = 5f;
@@ -46,13 +46,14 @@ public class M_PlayerController : MonoBehaviour
     public float grav = 9.81f;
     public bool grounded = false;
     public bool canJump = true;
-    private Animator animator;
+    [HideInInspector] public Animator animator; //TEST used to be private
     public float raycastDist = .2f;
     private bool doRaycast = true;
     [HideInInspector]
     public bool zeroMovement = false;
     
-    public bool sprint;
+    public bool sprint = false;
+    public float sprintspeed = 20;
     
     private void Start() 
     {
@@ -81,9 +82,14 @@ public class M_PlayerController : MonoBehaviour
         HandleMovement();
         // Debug.Log(velocity);
         
-        if (Input.GetButtonDown("Sprint")){
+        if (Input.GetButtonDown("Sprint") && sprint == false){
         	sprint = true;
-        } animator.SetBool("Sprint", sprint); //TEST does not fully work, as Sprint as no deactivtion
+        	speed = sprintspeed;
+        }else if(Input.GetButtonDown("Sprint") && sprint == true){
+        	sprint = false;
+        	speed = 10;
+        }
+        animator.SetBool("Sprint", sprint); //TEST does not fully work, as Sprint as no deactivtion
         
     }
 
