@@ -1446,6 +1446,7 @@ GameObject:
   - component: {fileID: 590292682}
   - component: {fileID: 590292684}
   - component: {fileID: 590292685}
+  - component: {fileID: 590292686}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1491,6 +1492,10 @@ MonoBehaviour:
   turnSpeedHigh: 20
   grav: 9.81
   grounded: 0
+  canJump: 1
+  raycastDist: 0.2
+  zeroMovement: 0
+  Sprint: 0
 --- !u!143 &590292683
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1525,6 +1530,8 @@ MonoBehaviour:
   capacity: 3
   respawn: 1
   respawnPos: {x: 0, y: 0, z: 0}
+  spawn: {fileID: 0}
+  chanceToSpawn: 0
 --- !u!114 &590292685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,6 +1552,25 @@ MonoBehaviour:
   turnSpeedHigh: 20
   grav: 75
   grounded: 0
+--- !u!95 &590292686
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590292680}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: faef38a2268b1a54fb1d94ca9c31526d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &600200042
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,6 +3363,10 @@ MonoBehaviour:
   maxTilt: 80
   camDist: 10
   isRotatable: 0
+  isRotatableX: 1
+  isRotatableY: 1
+  SensitivityX: 1
+  SensitivityY: 1
 --- !u!1 &991582548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3370,6 +3400,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmmount: 999
+  onlyForPlayer: 0
+  destroyWhenDamaged: 0
 --- !u!65 &991582550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6912,6 +6944,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmmount: 1
+  onlyForPlayer: 0
+  destroyWhenDamaged: 0
 --- !u!1 &1920875238
 GameObject:
   m_ObjectHideFlags: 0
@@ -7555,6 +7589,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmmount: 1
+  onlyForPlayer: 0
+  destroyWhenDamaged: 0
 --- !u!1 &1992366600
 GameObject:
   m_ObjectHideFlags: 0

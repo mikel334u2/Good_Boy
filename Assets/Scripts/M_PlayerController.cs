@@ -51,7 +51,10 @@ public class M_PlayerController : MonoBehaviour
     private bool doRaycast = true;
     [HideInInspector]
     public bool zeroMovement = false;
-    private void Start() 
+    
+    public bool Sprint;
+   
+    private void Start()
     {
         // load the CharacterController attatched to this object
         controller = GetComponent<CharacterController>();
@@ -60,6 +63,7 @@ public class M_PlayerController : MonoBehaviour
             Debug.Log("Add an Animator to your player");
         }
     }
+    
     private void Update() 
     {
         DoInput();
@@ -76,6 +80,14 @@ public class M_PlayerController : MonoBehaviour
 
         HandleMovement();
         // Debug.Log(velocity);
+    
+    if (Input.GetButtonDown("Sprint"))
+            {
+        	 Sprint = true;
+            }
+    
+    
+    
     }
 
     // Stores the input for later use
@@ -157,8 +169,9 @@ public class M_PlayerController : MonoBehaviour
         // and Linearly Interpolate based off of rotation (start moving slower and then speed up)
         // then we can add the y velocity back in
         velocityXZ = Vector3.Lerp(velocityXZ, forward * input.magnitude * speed, acceleration* Time.deltaTime);
-        velocity = new Vector3(velocityXZ.x, velocity.y, velocityXZ.z);
+        velocity = new Vector3(velocityXZ.x, velocity.y, velocityXZ.z);              
     }
+    
 
     // apply gravity, but only speed up when we are not grounded
     void DoGravity()
