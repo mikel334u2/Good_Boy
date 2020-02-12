@@ -2,6 +2,8 @@
 A game about a good boy ▼・ᴥ・▼
 
 ## Controls
-Arrow keys - Move player\n
-Mouse - Move camera\n
+Arrow keys - Move player
+
+Mouse - Move camera
+
 Left shift - Toggle sprint
