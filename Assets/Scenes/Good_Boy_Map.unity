@@ -16532,8 +16532,8 @@ MonoBehaviour:
   player: {fileID: 1423764877}
   playerHeight: 2
   tilt: 15
-  minTilt: 100
-  maxTilt: 100
+  minTilt: -10
+  maxTilt: 70
   camDist: 10
   isRotatable: 1
   isRotatableX: 1
