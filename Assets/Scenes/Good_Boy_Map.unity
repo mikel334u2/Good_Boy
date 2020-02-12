@@ -11802,6 +11802,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2815760446738277047, guid: e8d390092aaa70341bdf4bec8b1a9a27,
+        type: 3}
+      propertyPath: acceleration
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8055525233317946756, guid: e8d390092aaa70341bdf4bec8b1a9a27,
         type: 3}
       propertyPath: cam
@@ -16532,8 +16537,8 @@ MonoBehaviour:
   player: {fileID: 1423764877}
   playerHeight: 2
   tilt: 15
-  minTilt: 100
-  maxTilt: 100
+  minTilt: 10
+  maxTilt: 10
   camDist: 10
   isRotatable: 1
   isRotatableX: 1
