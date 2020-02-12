@@ -168,10 +168,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2815760446738277043}
   - component: {fileID: 2815760446738277041}
-  - component: {fileID: 2815760446738277040}
   - component: {fileID: 2815760446738277046}
   - component: {fileID: 2815760446738277047}
   - component: {fileID: 2815760446738277044}
+  - component: {fileID: 8055525233317946756}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -215,32 +215,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2815760446738277040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2815760446738277042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6f5c2f6013c0348a57e54de6476ac8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  speed: 10
-  jumpVelocity: 25
-  acceleration: 11
-  turnSpeedLow: 7
-  turnSpeedHigh: 20
-  grav: 75
-  grounded: 1
-  canJump: 1
-  animator: {fileID: 0}
-  raycastDist: 0.2
-  zeroMovement: 0
-  sprint: 0
-  sprintspeed: 20
 --- !u!114 &2815760446738277046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,8 +231,6 @@ MonoBehaviour:
   capacity: 3
   respawn: 1
   respawnPos: {x: 0, y: 0, z: 0}
-  spawn: {fileID: 0}
-  chanceToSpawn: 0
 --- !u!114 &2815760446738277047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +273,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8055525233317946756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2815760446738277042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e34bcbacc7a96428bc6b7dd7b1ffec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  speed: 10
+  jumpVelocity: 20
+  acceleration: 11
+  turnSpeedLow: 7
+  turnSpeedHigh: 20
+  grav: 60
+  grounded: 0
+  canJump: 0
+  animator: {fileID: 0}
+  raycastDist: 0.2
+  zeroMovement: 0
+  sprint: 0
+  sprintspeed: 20
 --- !u!1 &2815760446965420130
 GameObject:
   m_ObjectHideFlags: 0

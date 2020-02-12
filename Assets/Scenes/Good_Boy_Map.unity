@@ -10278,20 +10278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6f5c2f6013c0348a57e54de6476ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 963194228}
-  speed: 5
-  jumpVelocity: 10
-  acceleration: 11
-  turnSpeedLow: 7
-  turnSpeedHigh: 20
-  grav: 9.81
-  grounded: 0
-  canJump: 1
-  animator: {fileID: 0}
-  raycastDist: 0.2
-  zeroMovement: 0
-  sprint: 0
-  sprintspeed: 20
 --- !u!143 &590292683
 CharacterController:
   m_ObjectHideFlags: 0
@@ -11266,7 +11252,7 @@ PrefabInstance:
     - target: {fileID: 2815760446738277043, guid: e8d390092aaa70341bdf4bec8b1a9a27,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2815760446738277043, guid: e8d390092aaa70341bdf4bec8b1a9a27,
         type: 3}
@@ -11283,6 +11269,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8055525233317946756, guid: e8d390092aaa70341bdf4bec8b1a9a27,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 963194228}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8d390092aaa70341bdf4bec8b1a9a27, type: 3}
 --- !u!1 &693182555
@@ -12118,7 +12109,7 @@ PrefabInstance:
     - target: {fileID: 8073079150079247676, guid: f048ecd1c9e056542b4c3d5762043fe6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8073079150079247676, guid: f048ecd1c9e056542b4c3d5762043fe6,
         type: 3}
@@ -21264,7 +21255,7 @@ PrefabInstance:
     - target: {fileID: 3487607555462038674, guid: 240f865433d03a8469d4f5a438765fd7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3487607555462038674, guid: 240f865433d03a8469d4f5a438765fd7,
         type: 3}
