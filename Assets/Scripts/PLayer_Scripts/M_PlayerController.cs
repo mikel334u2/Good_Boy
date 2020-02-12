@@ -4,7 +4,7 @@ using UnityEngine;
 
 /**************************************************************************************************
  *                                                                                                *
- * These scripts, in this state are heavily influenced from this tutorial by Nimso Ny:   *
+ * These scripts, in this state are just about the same as following this tutorial by Nimso Ny:   *
  * https://www.youtube.com/watch?v=zXv7P6avhHM&list=PLoLkfS-a4sd2nPoeTkO-rj_Kj0FkKZYlw&index=3    *
  *                                                                                                *
  **************************************************************************************************
@@ -33,64 +33,32 @@ public class M_PlayerController : MonoBehaviour
     Vector3 intent;
     Vector3 velocity;
     Vector3 velocityXZ;
-    public float speed = 10f;
+    public float speed = 5f;
     public float jumpVelocity = 10;
     public float acceleration = 11;
     float turnSpeed = 5f;
     public float turnSpeedLow = 7f;
     public float turnSpeedHigh = 20f;
-    Vector3 forward;
-    RaycastHit hit;
 
     // Gravity
-    public float grav = 9.81f;
+    float grav = 9.81f;
     public bool grounded = false;
-    public bool canJump = true;
-    [HideInInspector] public Animator animator; //TEST used to be private
-    public float raycastDist = .2f;
-    private bool doRaycast = true;
-    [HideInInspector]
-    public bool zeroMovement = false;
-    
-    public bool sprint = false;
-    public float sprintspeed = 20;
-    
+
     private void Start() 
     {
         // load the CharacterController attatched to this object
         controller = GetComponent<CharacterController>();
-        if (!TryGetComponent<Animator>(out animator))
-        {
-            Debug.Log("Add an Animator to your player");
-        }
     }
-   
-    private void Update()
+    private void Update() 
     {
         DoInput();
         CalculateCamera();
         CalculateGround();
-        CalculateForward();
         DoMove();
         DoGravity();
-        if (canJump)
-        {
-            DoJump();
-        }
-        DoAttack();
+        DoJump();
 
-        HandleMovement();
-        // Debug.Log(velocity);
-        
-        if (Input.GetButtonDown("Sprint") && sprint == false){
-        	sprint = true;
-        	speed = sprintspeed;
-        }else if(Input.GetButtonDown("Sprint") && sprint == true){
-        	sprint = false;
-        	speed = 10;
-        }
-        animator.SetBool("Sprint", sprint); //TEST does not fully work, as Sprint as no deactivtion
-        
+        controller.Move(velocity * Time.deltaTime);
     }
 
     // Stores the input for later use
@@ -118,30 +86,18 @@ public class M_PlayerController : MonoBehaviour
     // from the player to the ground
     void CalculateGround()
     {
-        if(Physics.Raycast(transform.position+Vector3.up*0.1f, -Vector3.up, out hit, raycastDist) && doRaycast)
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position+Vector3.up*0.1f, -Vector3.up, out hit, 0.2f))
         {
             if (hit.collider.isTrigger == false)
             {
                 grounded = true;
-                // Debug.Log("Standing on: " + hit.transform.gameObject.name);
             }
         }
         else
-        {       
+        {
             grounded = false;
         }
-        animator.SetBool("Grounded", grounded); // set animator value of grounded
-        // Debug.Log(velocity.y);
-    }
-
-    void CalculateForward()
-    {
-        if (!grounded)
-        {
-            forward = transform.forward;
-            return;
-        }
-        forward = Vector3.Cross(transform.right, hit.normal);
     }
     
     // set the velocity for movement with respect to player input and camera orientation
@@ -158,7 +114,7 @@ public class M_PlayerController : MonoBehaviour
         
         // if we are getting movement input
         // turn the character to face the direction of movement
-        if (input.magnitude > 0 && !zeroMovement)
+        if (input.magnitude > 0)
         {
             Quaternion rot = Quaternion.LookRotation(intent);
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, turnSpeed * Time.deltaTime);
@@ -171,7 +127,7 @@ public class M_PlayerController : MonoBehaviour
         // get the appropriate velocity (which accounts for direction) and apply speed 
         // and Linearly Interpolate based off of rotation (start moving slower and then speed up)
         // then we can add the y velocity back in
-        velocityXZ = Vector3.Lerp(velocityXZ, forward * input.magnitude * speed, acceleration* Time.deltaTime);
+        velocityXZ = Vector3.Lerp(velocityXZ, transform.forward * input.magnitude * speed, acceleration* Time.deltaTime);
         velocity = new Vector3(velocityXZ.x, velocity.y, velocityXZ.z);
     }
 
@@ -180,17 +136,12 @@ public class M_PlayerController : MonoBehaviour
     {
         if (grounded)
         {
-            // animator.SetTrigger("Land");
             velocity.y = -0.5f;
         } else
         {
             velocity.y -= grav * Time.deltaTime;
-            if (velocity.y <= 0)
-            {
-                doRaycast = true;
-            }
         }
-        velocity.y = Mathf.Clamp(velocity.y, -100, 100);
+        velocity.y = Mathf.Clamp(velocity.y, -10, 10);
     }
 
     // Jump, by using the velocity we have set up
@@ -201,45 +152,8 @@ public class M_PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump"))
             {
-                doRaycast = false;
                 velocity.y = jumpVelocity;
-                // animator.SetTrigger("Jump");
             }
-        }
-    }
-    void DoAttack()
-    {
-        if (Input.GetButtonDown("Fire1") && grounded)
-        {
-            animator.SetTrigger("Attack");
-        }
-        
-    }
-    void HandleMovement()
-    {
-        zeroVelocityXZ(); // zero velocity if zeroMovement is true
-        Vector3 timedVelocity = velocity * Time.deltaTime;
-        controller.Move(timedVelocity);
-        timedVelocity.y = 0;
-        animator.SetFloat("MoveSpeed", timedVelocity.magnitude * 10);
-    }
-
-    public void StopMovement()
-    {
-        animator.SetFloat("MoveSpeed", 0);
-        this.enabled = false;
-    }
-    void zeroVelocityXZ()
-    {
-        if(zeroMovement)
-        {
-            velocity.x = 0;
-            velocity.z = 0;
-            canJump = false;
-        }
-        else
-        {
-            canJump = true;
         }
     }
 }

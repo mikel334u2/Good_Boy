@@ -12,7 +12,6 @@ public class M_BarUI : MonoBehaviour
     public Image image;
     private void LateUpdate() 
     {
-        fillAmount();
         Slide();
         toggleImage();
     }
@@ -39,10 +38,5 @@ public class M_BarUI : MonoBehaviour
         {
             image.enabled = true;
         }
-    }
-    void fillAmount()
-    {
-        var amount = health.current / health.capacity;
-        image.fillAmount = amount;
     }
 }
