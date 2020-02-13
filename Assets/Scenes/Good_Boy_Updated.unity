@@ -12287,7 +12287,8 @@ PrefabInstance:
       propertyPath: acceleration
       value: 25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2815760446738277047, guid: e8d390092aaa70341bdf4bec8b1a9a27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e8d390092aaa70341bdf4bec8b1a9a27, type: 3}
 --- !u!1 &693182555
 GameObject:

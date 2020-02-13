@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Good_Boy_Map.unity
+    path: Assets/Scenes/Good_Boy_Updated.unity
     guid: 1b2b8d08be766814988b6a16072dc8c6
+  - enabled: 1
+    path: Assets/Scenes/House01_Interior.unity
+    guid: 42a1d4380a863ed4a82f102ca447e729
   m_configObjects: {}
