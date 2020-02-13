@@ -6,6 +6,7 @@ public class Switch_Level_Tp_Portal : MonoBehaviour
 {
 
     public string levelToLoad01;
+    
 
     void OnTriggerEnter(Collider myCollider)
     {
@@ -13,5 +14,6 @@ public class Switch_Level_Tp_Portal : MonoBehaviour
         {
             Application.LoadLevel(levelToLoad01);
         }
+        
     }
 }

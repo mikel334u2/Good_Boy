@@ -858,7 +858,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000706271}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -919,7 +919,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2000706271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfce86d543819457aa2a2696202db1fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fdfd7f6307d04743ad6da7ed487d5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Good_Boy_Updated
+  levelToLoad01: Good_Boy_Updated
