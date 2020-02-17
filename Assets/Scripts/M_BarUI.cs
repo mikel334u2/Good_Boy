@@ -10,7 +10,8 @@ public class M_BarUI : MonoBehaviour
     static float t = 0.0f;
     float prevValue;
     public Image image;
-    private void LateUpdate() 
+    
+    private void LateUpdate()
     {
         Slide();
         toggleImage();
