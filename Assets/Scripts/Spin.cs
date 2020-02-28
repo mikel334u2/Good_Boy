@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Spin : MonoBehaviour
 {
+	
+	[SerializeField] float x;
+	[SerializeField] float y;
+	[SerializeField] float z;
+	
+	
+	
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +20,6 @@ public class Spin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	transform.Rotation.y(1);
+    	gameObject.transform.Rotate(z,x,y);
     }
 }
