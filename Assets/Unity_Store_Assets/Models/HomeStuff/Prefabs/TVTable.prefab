@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000011880463214}
   - component: {fileID: 33000012075995666}
   - component: {fileID: 23000012337175900}
-  - component: {fileID: 1062210881}
+  - component: {fileID: 2710502374678567166}
   m_Layer: 0
   m_Name: TVTable
   m_TagString: Untagged
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1062210881
+--- !u!64 &2710502374678567166
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
