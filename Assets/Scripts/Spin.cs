@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class Spin : MonoBehaviour
 {
 	
-	[SerializeField] float x;
-	[SerializeField] float y;
-	[SerializeField] float z;
+	[SerializeField] float x = 0;
+	[SerializeField] float y = 0;
+	[SerializeField] float z = 0;
 	
 	
 	
