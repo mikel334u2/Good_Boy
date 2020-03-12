@@ -148,7 +148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67, y: 7.1}
+  m_AnchoredPosition: {x: -26.7, y: 7.1}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8855094318622228137
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 27516956886420041}
   - component: {fileID: 2607073171432764153}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -528.9, y: 261.4}
+  m_AnchoredPosition: {x: -486.5, y: 261.4}
   m_SizeDelta: {x: 1024, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &955614140553964243
@@ -686,7 +686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.91038847}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -817.3, y: -71.8}
+  m_AnchoredPosition: {x: -738.9, y: -71.8}
   m_SizeDelta: {x: 175.91, y: 28.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4307267155820164328
