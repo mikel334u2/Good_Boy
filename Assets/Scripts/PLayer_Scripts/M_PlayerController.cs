@@ -91,6 +91,9 @@ public class M_PlayerController : MonoBehaviour
         }
         animator.SetBool("Sprint", sprint); //TEST does not fully work, as Sprint as no deactivtion
         
+        
+        //TEST
+        
     }
 
     // Stores the input for later use
@@ -242,4 +245,15 @@ public class M_PlayerController : MonoBehaviour
             canJump = true;
         }
     }
+    
+    void OnTriggerEnter(Collider collision) 
+    {
+    	if (collision.tag == "Bounce"){
+    		Debug.Log("Bounce");
+    		velocity.y = 30;
+    		
+    	}
+    	 
+    }
+    
 }
