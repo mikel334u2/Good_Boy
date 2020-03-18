@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/UI_Mockup/Start_SceneUI.unity
     guid: 81643d1f34d0b49b8a959353ca2f1b08
   - enabled: 1
+    path: Assets/Scenes/Dog_house.unity
+    guid: 5e6bc117230163348a1388a1c036f50a
+  - enabled: 1
+    path: Assets/Scenes/Good_Boy_Updated.unity
+    guid: 1b2b8d08be766814988b6a16072dc8c6
+  - enabled: 1
     path: Assets/Scenes/UI_Mockup/GameScene_UI.unity
     guid: 23a3d3d385b1e4c35aa45b3f3480bd8c
   m_configObjects: {}

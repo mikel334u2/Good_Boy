@@ -250,7 +250,7 @@ public class M_PlayerController : MonoBehaviour
     {
     	if (collision.tag == "Bounce"){
     		Debug.Log("Bounce");
-    		velocity.y = 30;
+    		velocity.y = -velocity.y + -10;
     		
     	}
     	 
