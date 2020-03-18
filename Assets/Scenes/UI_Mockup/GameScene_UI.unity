@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: 183195650}
   - component: {fileID: 183195649}
   - component: {fileID: 183195648}
+  - component: {fileID: 183195651}
   m_Layer: 5
   m_Name: Book_Button
   m_TagString: Untagged
@@ -621,6 +622,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183195646}
   m_CullTransparentMesh: 0
+--- !u!114 &183195651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183195646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1665d553dfe204478aac76fc28b6b08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputName: e
 --- !u!1 &262915750
 GameObject:
   m_ObjectHideFlags: 0

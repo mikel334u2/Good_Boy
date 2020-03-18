@@ -10,8 +10,12 @@ public class LoadGameObject : MonoBehaviour
     
      public void ActivateBook()
     {
-        BookUI.SetActive (true);
-        Debug.Log("Book Openning");
+        if(BookUI != null)
+        {
+            bool isActive = BookUI.activeSelf;
+            
+            BookUI.SetActive(!isActive);
+        }
     }
     
     // Start is called before the first frame update
