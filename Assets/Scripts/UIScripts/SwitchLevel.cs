@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SwitchLevel : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class SwitchLevel : MonoBehaviour
     //Update is called once per frame
     public void LoadTheLevel ()
     {
-        Application.LoadLevel(levelToLoad);
+        SceneManager.LoadScene(levelToLoad);
 
     }
 }

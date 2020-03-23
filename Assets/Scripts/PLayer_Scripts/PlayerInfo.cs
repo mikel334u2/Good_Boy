@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class PlayerInfo : MonoBehaviour
         public int RequiredItems { get => requiredItems; set => requiredItems = value; }
         public int CurrentItems { get => currentItems; set => currentItems = value; }
     }
+
     [HideInInspector] public List<string> friends;
     public float currentHealth = 3;
     public float capacityHealth = 3;
@@ -28,6 +31,8 @@ public class PlayerInfo : MonoBehaviour
     public Vector3 respawnPos = new Vector3(0, 0, 0);
     private M_PlayerController controller;
     [HideInInspector] public List<Quest> quests;
+    public Text questText;
+    public Text friendsList;
 
     private void Start()
     {
@@ -36,7 +41,8 @@ public class PlayerInfo : MonoBehaviour
         respawnPos = transform.position;
         TryGetComponent<M_PlayerController>(out controller);
     }
-    public void modifyHealth(float amount)
+
+    public void ModifyHealth(float amount)
     {
         // TODO: spot for animation
         currentHealth += amount;
@@ -84,6 +90,43 @@ public class PlayerInfo : MonoBehaviour
         if (!friends.Contains(friendName))
         {
             friends.Add(friendName);
+        }
+    }
+
+    public void PrintQuests()
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (Quest quest in quests)
+        {
+            sb.Append("Quest: ").Append(quest.Name);
+            sb.Append("\nAssigned by: ").Append(quest.Assigner);
+            sb.Append("\n").Append(quest.CurrentItems).Append("/").Append(quest.RequiredItems).Append(" Items Obtained");
+            sb.Append("\nDescription\n").Append(quest.Description);
+            sb.Append("\n\n");
+        }
+        questText.text = sb.ToString().TrimEnd();
+    }
+
+    public void PrintFriends()
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (string friend in friends)
+        {
+            sb.Append(friend).Append('\n');
+        }
+        friendsList.text = sb.ToString().TrimEnd();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        foreach (Quest quest in quests)
+        {
+            if (other.gameObject.tag == quest.TagOfItem)
+            {
+                Destroy(other.gameObject);
+                quest.CurrentItems++;
+                Debug.Log(quest.Name + "... +1" + quest.TagOfItem + "!");
+            }
         }
     }
 }

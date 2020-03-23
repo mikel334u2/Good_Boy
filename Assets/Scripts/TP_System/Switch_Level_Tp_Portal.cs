@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Switch_Level_Tp_Portal : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Switch_Level_Tp_Portal : MonoBehaviour
     {
         if (myCollider.gameObject.name == "Player")
         {
-            Application.LoadLevel(levelToLoad01);
+            SceneManager.LoadScene(levelToLoad01);
         }
         
     }
