@@ -10,9 +10,19 @@ Here you can edit what is being said without having to edit every line in Unity.
 
 Trust me, it can get annoying very quickly having to click on textboxes and such.
 
+Text must be separated by TWO new lines, but...
+...there can be a new line in any dialogue.
+
+[QUEST=Random Quest][TAG=Apple][NUM=3][DESC=Collect 3 apples.]
+The above quest dialogue tags must strictly use adjacent brackets. Any follow up dialogue, however, can be on a new line if you want.
+
 Of course, if you wanted nonlinear dialogue, you would need a way to implement player choice, a way to record it, and a way to navigate a file or two.
 
 EndQueue
+
+** Image Loading ** (Needs work)
+
+[IMG=Images/image01] Here is a loaded image from Resources/Images/image01.png
 
 ** Multiple choice ** (Needs work)
 

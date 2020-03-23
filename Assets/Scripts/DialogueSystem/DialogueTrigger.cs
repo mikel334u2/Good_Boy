@@ -14,25 +14,26 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public TextAsset TextFileAsset; // your imported text file for your NPC
-    public bool TriggerWithButton;
+    public TextAsset textFileAsset; // your imported text file for your NPC
+    public bool TriggerWithButton = false;
     public GameObject optionalButtonIndicator;
-    public Vector3 optionalIndicatorOffset = new Vector3 (0,0,0);
+    public Vector3 optionalIndicatorOffset = new Vector3(0, 0, 0);
     private Queue<string> dialogue = new Queue<string>(); // stores the dialogue (Great Performance!)
     private float waitTime = 0.5f; // lag time for advancing dialogue so you can actually read it
     private float nextTime = 0f; // used with waitTime to create a timer system
-    private bool dialogueTiggered;
+    private bool dialogueTriggered;
     private GameObject indicator;
+    private DialogueManager dialogueManager;
+    private string button = "Jump";
 
     // public bool useCollision; // unused for now
 
-    private void Start() 
+    private void Start()
     {
+        dialogueManager = FindObjectOfType<DialogueManager>();
         if (optionalButtonIndicator != null)
         {
-            indicator =  GameObject.Instantiate(optionalButtonIndicator);
-            indicator.transform.parent = transform;
-            indicator.transform.localPosition = optionalIndicatorOffset;
+            indicator = Instantiate(optionalButtonIndicator, transform.position + optionalIndicatorOffset, Quaternion.identity, transform);
             indicator.SetActive(false);
         }
     }
@@ -40,43 +41,65 @@ public class DialogueTrigger : MonoBehaviour
     void TriggerDialogue()
     {
         ReadTextFile(); // loads in the text file
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue); // Accesses Dialogue Manager and Starts Dialogue
+        dialogueManager.StartDialogue(dialogue); // Accesses Dialogue Manager and Starts Dialogue
     }
 
     /* loads in your text file */
     private void ReadTextFile()
     {
-        string txt = TextFileAsset.text;
+        string txt = textFileAsset.text;
 
-        string[] lines = txt.Split(System.Environment.NewLine.ToCharArray()); // Split dialogue lines by newline
+        // Split dialogue lines by 2 newlines
+        string[] lines = txt.Split((System.Environment.NewLine + System.Environment.NewLine).ToCharArray());
 
         foreach (string line in lines) // for every line of dialogue
         {
-            if (!string.IsNullOrEmpty(line) )// ignore empty lines of dialogue
+            if (!string.IsNullOrEmpty(line))// ignore empty lines of dialogue
             {
-                if (line.StartsWith("[")) // e.g [NAME=Michael] Hello, my name is Michael
+                int start = 0; // Starting location to look for strings
+                int end = 0;   // End of a string bit
+                if (line.Substring(start).StartsWith("[NAME")) // e.g [NAME=Michael] Hello, my name is Michael
                 {
-                    string special = line.Substring(0, line.IndexOf(']') + 1); // special = [NAME=Michael]
-                    string curr = line.Substring(line.IndexOf(']') + 1); // curr = Hello, ...
-                    dialogue.Enqueue(special); // adds to the dialogue to be printed
-                    dialogue.Enqueue(curr);
+                    // substring(start, length), length = ending index (new "start") - starting index
+                    end = line.IndexOf(']', start) + 1;
+                    dialogue.Enqueue(line.Substring(start, end - start)); // adds [NAME=Michael] to be printed
+                    start = end;
                 }
-                else
+                // e.g. [QUEST=Quest Name][TAG=Apple][NUM=3][DESC=Your job is to collect...] So your job is to...
+                if (line.Substring(start).StartsWith("[QUEST"))
                 {
-                    dialogue.Enqueue(line); // adds to the dialogue to be printed
+                    for (int i = 0; i < 4; i++)
+                    {
+                        end = line.IndexOf(']', start) + 1;
+                        dialogue.Enqueue(line.Substring(start, end - start)); // adds [QUEST=Quest Name] to be printed
+                        start = end;
+                    }
                 }
+                dialogue.Enqueue(line.Substring(start).Trim()); // adds to the dialogue to be printed
             }
         }
         dialogue.Enqueue("EndQueue");
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
+            if (gameObject.tag == "NPC")
+            {
+                other.gameObject.GetComponent<PlayerInfo>().AddFriend(gameObject.name);
+            }
+
             if (!TriggerWithButton)
             {
                 TriggerDialogue();
+                dialogueTriggered = true;
+                nextTime = Time.timeSinceLevelLoad + waitTime;
+            }
+            else if (indicator != null)
+            {
+                indicator.SetActive(true);
             }
             // Debug.Log("Collision");
         }
@@ -84,48 +107,34 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // Debug.Log(other.name);
-        if (other.gameObject.tag == "Player" && Input.GetButton("Jump") && nextTime < Time.timeSinceLevelLoad)
+        if (other.gameObject.tag == "Player" && Input.GetButton(button) && nextTime < Time.timeSinceLevelLoad)
         {
-            if (!dialogueTiggered)
+            if (!dialogueTriggered)
             {
                 TriggerDialogue();
-                dialogueTiggered = true;
-                if (indicator != null && indicator.activeSelf == true)
+                dialogueTriggered = true;
+                if (indicator != null)
                 {
                     indicator.SetActive(false);
                 }
-                nextTime = Time.timeSinceLevelLoad + waitTime;
             }
-            else 
+            else
             {
-                nextTime = Time.timeSinceLevelLoad + waitTime;
-                var dm = FindObjectOfType<DialogueManager>();
-                dm.AdvanceDialogue();
+                dialogueManager.AdvanceDialogue();
             }
-        }
-        else if (other.gameObject.tag == "Player")
-        {
-            if (!dialogueTiggered)
-            {
-                // Debug.Log("Press Space");
-                if (indicator != null && indicator.activeSelf == false)
-                {
-                    indicator.SetActive(true);
-                }
-            }
+            nextTime = Time.timeSinceLevelLoad + waitTime;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            FindObjectOfType<DialogueManager>().EndDialogue();
-            dialogueTiggered = false;
-
-            if (indicator != null && indicator.activeSelf == true)
-                {
-                    indicator.SetActive(false);
-                }
+            dialogueManager.EndDialogue();
+            dialogueTriggered = false;
+            if (indicator != null)
+            {
+                indicator.SetActive(false);
+            }
         }
     }
 }

@@ -18,71 +18,83 @@ public class DialogueManager : MonoBehaviour
     public Text TextBox; // the text body
     public Text NameText; // the text body of the name you want to display
     public bool freezePlayerOnDialogue = true;
-    public string curr = "";
-    public string next = "";
-
-    // private bool isOpen; // represents if the dialogue box is open or closed
-
     private Queue<string> inputStream = new Queue<string>(); // stores dialogue
-    private M_PlayerController pController;
+    private M_PlayerController pController; // used for freezing player
+    private PlayerInfo playerInfo;
 
     private void Start()
     {
         CanvasBox.SetActive(false); // close the dialogue box on play
         GameObject.FindGameObjectWithTag("Player").TryGetComponent<M_PlayerController>(out pController);
-    }
-
-    private void DisablePlayerController()
-    {
-        pController.zeroMovement = true;
-    }
-
-    private void EnablePlayerController()
-    {
-        pController.zeroMovement = false;
+        GameObject.FindGameObjectWithTag("Player").TryGetComponent<PlayerInfo>(out playerInfo);
     }
 
     public void StartDialogue(Queue<string> dialogue)
     {
         if (freezePlayerOnDialogue)
         {
-            DisablePlayerController();
+            pController.zeroMovement = true; // disable player controller
         }
-
         CanvasBox.SetActive(true); // open the dialogue box
-        // isOpen = true;
         inputStream = dialogue; // store the dialogue from dialogue trigger
-        PrintDialogue(); // Prints out the first line of dialogue
+        AdvanceDialogue(); // Prints out the first line of dialogue
     }
 
     public void AdvanceDialogue() // call when a player presses a button in Dialogue Trigger
     {
-        if (inputStream.Count > 0)
+        if (inputStream.Count <= 0)
         {
-            PrintDialogue();
+            return;
         }
-    }
-
-    private void PrintDialogue()
-    {
+        
+        PlayerInfo.Quest quest = null; // quest to add to player's quests
         if (inputStream.Peek().Contains("EndQueue")) // special phrase to stop dialogue
         {
             inputStream.Dequeue(); // Clear Queue
             EndDialogue();
         }
-        else if (inputStream.Peek().Contains("[NAME="))
-            {
-                string name = inputStream.Peek();
-                name = inputStream.Dequeue().Substring(name.IndexOf('=') + 1, name.IndexOf(']') - (name.IndexOf('=') + 1));
-                NameText.text = name;
-                StoreDialogue();
-                PrintDialogue(); // print the rest of this line
-            }
+        else if (inputStream.Peek().Contains("[NAME"))
+        {
+            NameText.text = DequeueNextTag();
+            AdvanceDialogue(); // print the rest of this line
+        }
+        else if (inputStream.Peek().Contains("[QUEST")) // this must be the first tag of the "quest" tags
+        {
+            quest = new PlayerInfo.Quest();
+            quest.Name = DequeueNextTag();
+            AdvanceDialogue();
+        }
+        else if (inputStream.Peek().Contains("[TAG"))
+        {
+            quest.TagOfItem = DequeueNextTag();
+            AdvanceDialogue();
+        }
+        else if (inputStream.Peek().Contains("[NUM"))
+        {
+            quest.RequiredItems = int.Parse(DequeueNextTag());
+            AdvanceDialogue();
+        }
+        else if (inputStream.Peek().Contains("[DESC"))
+        {
+            quest.Description = DequeueNextTag();
+            AdvanceDialogue();
+        }
         else
         {
             TextBox.text = inputStream.Dequeue();
-            StoreDialogue();
+            if (quest != null)
+            {
+                quest.CurrentItems = 0;
+                quest.Assigner = NameText.text; // Gets the name of the assigner from the name text box
+                playerInfo.quests.Add(quest);
+            }
         }
+    }
+
+    private string DequeueNextTag()
+    {
+        string tag = inputStream.Dequeue();
+        return tag.Substring(tag.IndexOf('=') + 1, tag.IndexOf(']') - (tag.IndexOf('=') + 1));
     }
 
     public void EndDialogue()
@@ -91,23 +103,9 @@ public class DialogueManager : MonoBehaviour
         NameText.text = "";
         inputStream.Clear();
         CanvasBox.SetActive(false);
-        // isOpen = false;
         if (freezePlayerOnDialogue)
         {
-            EnablePlayerController();
+            pController.zeroMovement = false; // enable player controller
         }
     }
-
-    void StoreDialogue()
-    {
-        if (inputStream.Count > 0)
-            {
-                curr = next;
-                if (inputStream.Count > 1)
-                {
-                    next = inputStream.Peek();
-                }
-            }
-    }
-
 }
