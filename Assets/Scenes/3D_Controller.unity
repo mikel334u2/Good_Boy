@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45142955, g: 0.5008045, b: 0.5716962, a: 1}
+  m_IndirectSpecularColor: {r: 0.45142955, g: 0.5008049, b: 0.5716966, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -660,6 +660,12 @@ Transform:
   m_Father: {fileID: 147383003}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &208861895 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2815760446738277043, guid: e8d390092aaa70341bdf4bec8b1a9a27,
+    type: 3}
+  m_PrefabInstance: {fileID: 1242106737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &219322086
 GameObject:
   m_ObjectHideFlags: 0
@@ -3051,13 +3057,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465ba3fcd5440d74da0f537316d5dce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 590292681}
+  player: {fileID: 208861895}
   playerHeight: 1
   tilt: 15
   minTilt: -80
   maxTilt: 80
   camDist: 10
   isRotatable: 1
+  isRotatableX: 1
+  isRotatableY: 1
+  SensitivityX: 1
+  SensitivityY: 1
 --- !u!1 &991582548
 GameObject:
   m_ObjectHideFlags: 0

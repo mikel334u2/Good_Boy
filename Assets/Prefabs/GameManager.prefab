@@ -1655,9 +1655,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 4820268759111424482}
   playerHeight: 2
-  tilt: 15
-  minTilt: -10
-  maxTilt: 70
+  tilt: 5
+  minTilt: -11
+  maxTilt: 40
   camDist: 10
   isRotatable: 1
   isRotatableX: 1
