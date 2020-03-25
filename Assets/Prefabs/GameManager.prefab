@@ -1110,7 +1110,7 @@ GameObject:
   - component: {fileID: 4307267155763388662}
   - component: {fileID: 4307267155763388661}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_Maria
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1524,21 +1524,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2862091, y: 2.0582838, z: 1.3458481}
   m_Center: {x: -0.003074646, y: 1.029, z: 0.013408661}
---- !u!114 &5869426486194334112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4820268759111424483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0e141845b9bb3e4d83b0d22ef9021a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key3: {fileID: 230503826561395134}
-  key2: {fileID: 174370291431480618}
-  key1: {fileID: 427576293130667977}
 --- !u!114 &2070282427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,6 +1543,21 @@ MonoBehaviour:
   respawnPos: {x: 0, y: 0, z: 0}
   questText: {fileID: 0}
   friendsList: {fileID: 0}
+--- !u!114 &5869426486194334112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4820268759111424483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e141845b9bb3e4d83b0d22ef9021a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key3: {fileID: 230503826561395134}
+  key2: {fileID: 174370291431480618}
+  key1: {fileID: 427576293130667977}
 --- !u!1 &7347235560102527540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,17 +1822,17 @@ PrefabInstance:
     - target: {fileID: 2815760446738277043, guid: e8d390092aaa70341bdf4bec8b1a9a27,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -50.78
+      value: 46.48
       objectReference: {fileID: 0}
     - target: {fileID: 2815760446738277043, guid: e8d390092aaa70341bdf4bec8b1a9a27,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.53
+      value: -11.95
       objectReference: {fileID: 0}
     - target: {fileID: 2815760446738277043, guid: e8d390092aaa70341bdf4bec8b1a9a27,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -53.89
+      value: -25.71
       objectReference: {fileID: 0}
     - target: {fileID: 2815760446738277043, guid: e8d390092aaa70341bdf4bec8b1a9a27,
         type: 3}
