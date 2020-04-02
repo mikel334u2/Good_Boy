@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 431008}
   - component: {fileID: 3331670}
   - component: {fileID: 2314182}
+  - component: {fileID: 1535667875}
   m_Layer: 0
   m_Name: pPlane3
   m_TagString: Untagged
@@ -79,6 +80,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1535667875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea7797a27fb70447a6e444881e22b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 2
+  y: 0
+  z: 0
 --- !u!1 &170560
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +104,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 462124}
-  - component: {fileID: 4753351338287817828}
   - component: {fileID: 9068244333277922172}
   - component: {fileID: 2911726919757199389}
   - component: {fileID: 2911726919757199388}
@@ -114,21 +129,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -68.885, z: 0}
---- !u!114 &4753351338287817828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea7797a27fb70447a6e444881e22b27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: 0
-  y: 2
-  z: 0
 --- !u!135 &9068244333277922172
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1092,21 +1092,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 1
-          inSlope: -1.4892579
-          outSlope: -1.4892579
+          value: 0
+          inSlope: 6.5031815
+          outSlope: 6.5031815
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.09417039
+          outWeight: 0.051569507
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -3.2634094
-          outSlope: -3.2634094
+          inSlope: -0.2813289
+          outSlope: -0.2813289
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.067264676
+          inWeight: 0.06502241
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -4841,7 +4841,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -4851,7 +4851,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 1
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
@@ -4859,7 +4859,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
