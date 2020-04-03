@@ -8,6 +8,7 @@ TagManager:
   - Bounce
   - Key
   - water
+  - Fish
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - 
   - Text
-  - 
+  - PostProcessing
   - 
   - 
   - 
