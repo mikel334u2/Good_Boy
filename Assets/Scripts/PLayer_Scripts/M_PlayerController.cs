@@ -92,6 +92,11 @@ public class M_PlayerController : MonoBehaviour
         animator.SetBool("Sprint", sprint); //TEST does not fully work, as Sprint as no deactivtion
         
         
+        if (Input.GetKey("escape"))
+        {
+            Debug.Log("Game exiting");
+            Application.Quit();
+        }
         //TEST
         
     }
