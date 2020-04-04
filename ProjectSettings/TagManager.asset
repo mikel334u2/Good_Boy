@@ -10,6 +10,7 @@ TagManager:
   - water
   - Fish
   - Death
+  - NPC
   layers:
   - Default
   - TransparentFX

@@ -31,7 +31,7 @@ public class M_PlayerController : MonoBehaviour
 
     // Physics
     Vector3 intent;
-    Vector3 velocity;
+    public Vector3 velocity;
     Vector3 velocityXZ;
     public float speed = 10f;
     public float jumpVelocity = 10;

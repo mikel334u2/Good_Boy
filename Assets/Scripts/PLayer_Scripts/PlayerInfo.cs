@@ -6,83 +6,38 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
-    public class Quest
-    {
-        // "Collect" type quests
-        private string name;
-        private string assigner;
-        private string description;
-        private string tagOfItem;
-        private int requiredItems;
-        private int currentItems;
-
-        public string Name { get => name; set => name = value; }
-        public string Assigner { get => assigner; set => assigner = value; }
-        public string Description { get => description; set => description = value; }
-        public string TagOfItem { get => tagOfItem; set => tagOfItem = value; }
-        public int RequiredItems { get => requiredItems; set => requiredItems = value; }
-        public int CurrentItems { get => currentItems; set => currentItems = value; }
-    }
 
     [HideInInspector] public List<string> friends;
-    public float currentHealth = 3;
-    public float capacityHealth = 3;
-    public bool respawn = true;
-    public Vector3 respawnPos = new Vector3(0, 0, 0);
+    //public float currentHealth = 3;
+    //public float capacityHealth = 3;
+    // public bool respawn = true;
+    // public Vector3 respawnPos = new Vector3(0, 0, 0);
     private M_PlayerController controller;
-    [HideInInspector] public List<Quest> quests;
+    private GameObject respawn;
+    [HideInInspector] public List<Quest> quests = new List<Quest>();
     public Text questText;
-    public Text friendsList;
+    // public Text friendsList;
+    // public Text questMessage;
 
     private void Start()
     {
         friends = new List<string>();
-        currentHealth = capacityHealth;
-        respawnPos = transform.position;
+        // currentHealth = capacityHealth;
+        // respawnPos = transform.position;
         TryGetComponent<M_PlayerController>(out controller);
+        respawn = GameObject.FindGameObjectWithTag("Respawn");
+        questText.gameObject.SetActive(false);
+        transform.position = respawn.transform.position;
     }
 
-    public void ModifyHealth(float amount)
+    private void Update()
     {
-        // TODO: spot for animation
-        currentHealth += amount;
-        if (currentHealth > capacityHealth)
+        if (Input.GetButtonDown("e"))
         {
-            currentHealth = capacityHealth;
+            controller.zeroMovement = !controller.zeroMovement;
+            questText.text = "(" + (quests[0].Completed ? '/' : ' ') + ")\t" + quests[0].Name;
+            questText.gameObject.SetActive(!questText.gameObject.activeSelf);
         }
-        else if (currentHealth <= 0)
-        {
-            if (respawn)
-            {
-                UponRespawn();
-            }
-            else
-            {
-                // Kill the object
-                // TODO: spot for animation
-                gameObject.SetActive(false);
-                Destroy(gameObject);
-            }
-        }
-    }
-
-    private void UponRespawn()
-    {
-        // TODO: Spot for animation
-        if (controller != null)
-        {
-            controller.grounded = true;
-            controller.enabled = false;
-            Invoke("WaitThenRespawn", 1.5f);
-        }
-
-    }
-
-    void WaitThenRespawn()
-    {
-        transform.position = respawnPos;
-        currentHealth = capacityHealth;
-        controller.enabled = true;
     }
 
     public void AddFriend(string friendName)
@@ -93,40 +48,105 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 
-    public void PrintQuests()
-    {
-        StringBuilder sb = new StringBuilder();
-        foreach (Quest quest in quests)
-        {
-            sb.Append("Quest: ").Append(quest.Name);
-            sb.Append("\nAssigned by: ").Append(quest.Assigner);
-            sb.Append("\n").Append(quest.CurrentItems).Append("/").Append(quest.RequiredItems).Append(" Items Obtained");
-            sb.Append("\nDescription\n").Append(quest.Description);
-            sb.Append("\n\n");
-        }
-        questText.text = sb.ToString().TrimEnd();
-    }
+    // public void PrintQuest(int i)
+    // {
+    //     StringBuilder sb = new StringBuilder();
+    //     sb.Append(quests[i].ToString());
+    //     questText.text = sb.ToString().TrimEnd();
+    // }
 
-    public void PrintFriends()
-    {
-        StringBuilder sb = new StringBuilder();
-        foreach (string friend in friends)
-        {
-            sb.Append(friend).Append('\n');
-        }
-        friendsList.text = sb.ToString().TrimEnd();
-    }
+    // public void PrintFriends()
+    // {
+    //     StringBuilder sb = new StringBuilder();
+    //     foreach (string friend in friends)
+    //     {
+    //         sb.Append(friend).Append('\n');
+    //     }
+    //     friendsList.text = sb.ToString().TrimEnd();
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Death")
+        {
+            Respawn();
+        }
         foreach (Quest quest in quests)
         {
-            if (other.gameObject.tag == quest.TagOfItem)
+            if (quest.Completed) continue; // Do not check completed quests
+            
+            // If it's a collecting quest item, collect the item
+            if (quest.Type == QuestType.Collect && other.gameObject.tag == quest.TagOfItem)
             {
-                Destroy(other.gameObject);
                 quest.CurrentItems++;
-                Debug.Log(quest.Name + "... +1" + quest.TagOfItem + "!");
+                if (quest.CurrentItems >= quest.RequiredItems)
+                {
+                    quest.Completed = true;
+                    // [TODO] Display some congratulations message for collecting all items
+                }
+                Destroy(other.gameObject);
+            }
+
+            // If it's a goal area, complete that quest
+            else if (quest.Type == QuestType.Goal && other.name == quest.NameOfGoal)
+            {
+                quest.Completed = true;
+                Debug.Log("Goal reached.");
+                // [TODO] Display congratulations message for reaching goal
             }
         }
     }
+
+    private void Respawn()
+    {
+        controller.grounded = true;
+        transform.position = respawn.transform.position;
+        Debug.Log("Died");
+    }
+
+    // public void ModifyHealth(float amount)
+    // {
+    //     // TODO: spot for animation
+    //     currentHealth += amount;
+    //     if (currentHealth > capacityHealth)
+    //     {
+    //         currentHealth = capacityHealth;
+    //     }
+    //     else if (currentHealth <= 0)
+    //     {
+    //         if (respawn)
+    //         {
+    //             // UponRespawn();
+    //             controller.grounded = true;
+    //             transform.position = respawnPos;
+    //             currentHealth = capacityHealth;
+    //         }
+    //         else
+    //         {
+    //             // Kill the object
+    //             // TODO: spot for animation
+    //             gameObject.SetActive(false);
+    //             Destroy(gameObject);
+    //         }
+    //     }
+    // }
+
+    // private void UponRespawn()
+    // {
+    //     // TODO: Spot for animation
+    //     if (controller != null)
+    //     {
+    //         controller.grounded = true;
+    //         controller.enabled = false;
+    //         Invoke("WaitThenRespawn", 1.5f);
+    //     }
+
+    // }
+
+    // void WaitThenRespawn()
+    // {
+    //     transform.position = respawnPos;
+    //     currentHealth = capacityHealth;
+    //     controller.enabled = true;
+    // }
 }
