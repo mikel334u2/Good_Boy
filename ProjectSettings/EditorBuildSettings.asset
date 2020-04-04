@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dog_house.unity
     guid: 5e6bc117230163348a1388a1c036f50a
-  - enabled: 1
-    path: Assets/Scenes/c.unity
-    guid: 1b2b8d08be766814988b6a16072dc8c6
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/UI_Mockup/GameScene_UI.unity
     guid: 23a3d3d385b1e4c35aa45b3f3480bd8c
