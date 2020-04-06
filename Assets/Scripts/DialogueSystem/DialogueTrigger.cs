@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public TextAsset textFileAsset; // your imported text file for your NPC
+    public List<TextAsset> textFileAssets; // your imported text file for your NPC
     public bool TriggerWithButton = false;
     public GameObject optionalButtonIndicator;
     public Vector3 optionalIndicatorOffset = new Vector3(0, 0, 0);
@@ -32,6 +32,7 @@ public class DialogueTrigger : MonoBehaviour
     private float nextTime = 0f; // used with waitTime to create a timer system
     private GameObject indicator;
     private DialogueManager dialogueManager;
+    private PlayerInfo player;
     private string[] Separators = {"\'\'"}; // splits the dialogue by 2 single quotes
 
     private void Start()
@@ -48,6 +49,7 @@ public class DialogueTrigger : MonoBehaviour
     private void ReadTextFile()
     {
         // Retrieve text, then split dialogue lines by 2 single quotes, removing empty strings
+        TextAsset textFileAsset = CheckAndLoadText();
         string txt = textFileAsset.text;
         string[] lines = txt.Split(Separators, System.StringSplitOptions.RemoveEmptyEntries);
 
@@ -86,6 +88,20 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
+    // Loads text based on conditions
+    private TextAsset CheckAndLoadText()
+    {
+        // if (gameObject.name.Equals("Cat Lite") && player.quests.ContainsKey("Breaking Out"))
+        // {
+        //     if (!player.quests["Breaking Out"].Completed)
+        //     {
+        //         return textFileAssets[2];
+        //     }
+        //     return textFileAssets[1];
+        // }
+        return textFileAssets[0];
+    }
+
     /*
      * Searches for a tag in the line.
      * If found, add it to dialogue and return true.
@@ -108,10 +124,14 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            if (player == null)
+            {
+                other.gameObject.TryGetComponent<PlayerInfo>(out player);
+            }
             if (gameObject.tag == "NPC")
             {
                 // If the other character is an NPC, add it as a friend
-                other.gameObject.GetComponent<PlayerInfo>().AddFriend(gameObject.name);
+                player.AddFriend(gameObject.name);
             }
 
             if (!TriggerWithButton) // If dialogue triggered on collision
