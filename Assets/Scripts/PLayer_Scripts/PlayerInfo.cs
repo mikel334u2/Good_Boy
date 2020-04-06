@@ -14,7 +14,7 @@ public class PlayerInfo : MonoBehaviour
     // public Vector3 respawnPos = new Vector3(0, 0, 0);
     private M_PlayerController controller;
     private GameObject respawn;
-    [HideInInspector] public List<Quest> quests = new List<Quest>();
+    [HideInInspector] public Dictionary<string, Quest> quests = new Dictionary<string, Quest>();
     public Text questText;
     // public Text friendsList;
     // public Text questMessage;
@@ -24,7 +24,10 @@ public class PlayerInfo : MonoBehaviour
         friends = new List<string>();
         // currentHealth = capacityHealth;
         // respawnPos = transform.position;
-        TryGetComponent<M_PlayerController>(out controller);
+        if (!TryGetComponent<M_PlayerController>(out controller))
+        {
+            Debug.LogError("Attach a player controller to PlayerInfo");
+        }
         respawn = GameObject.FindGameObjectWithTag("Respawn");
         questText.gameObject.SetActive(false);
         transform.position = respawn.transform.position;
@@ -35,7 +38,7 @@ public class PlayerInfo : MonoBehaviour
         if (Input.GetButtonDown("e"))
         {
             controller.zeroMovement = !controller.zeroMovement;
-            questText.text = "(" + (quests[0].Completed ? '/' : ' ') + ")\t" + quests[0].Name;
+            questText.text = quests.ContainsKey("Breaking Out") ? ("(" + (quests["Breaking Out"].Completed ? 'X' : ' ') + ")\tBreaking Out") : null;
             questText.gameObject.SetActive(!questText.gameObject.activeSelf);
         }
     }
@@ -69,9 +72,9 @@ public class PlayerInfo : MonoBehaviour
     {
         if (other.gameObject.tag == "Death")
         {
-            Respawn();
+            StartCoroutine("Respawn");
         }
-        foreach (Quest quest in quests)
+        foreach (Quest quest in quests.Values)
         {
             if (quest.Completed) continue; // Do not check completed quests
             
@@ -97,56 +100,12 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 
-    private void Respawn()
+    IEnumerator Respawn()
     {
         controller.grounded = true;
+        controller.enabled = false;
+        yield return new WaitForSeconds(1.0f);
+        controller.enabled = true;
         transform.position = respawn.transform.position;
-        Debug.Log("Died");
     }
-
-    // public void ModifyHealth(float amount)
-    // {
-    //     // TODO: spot for animation
-    //     currentHealth += amount;
-    //     if (currentHealth > capacityHealth)
-    //     {
-    //         currentHealth = capacityHealth;
-    //     }
-    //     else if (currentHealth <= 0)
-    //     {
-    //         if (respawn)
-    //         {
-    //             // UponRespawn();
-    //             controller.grounded = true;
-    //             transform.position = respawnPos;
-    //             currentHealth = capacityHealth;
-    //         }
-    //         else
-    //         {
-    //             // Kill the object
-    //             // TODO: spot for animation
-    //             gameObject.SetActive(false);
-    //             Destroy(gameObject);
-    //         }
-    //     }
-    // }
-
-    // private void UponRespawn()
-    // {
-    //     // TODO: Spot for animation
-    //     if (controller != null)
-    //     {
-    //         controller.grounded = true;
-    //         controller.enabled = false;
-    //         Invoke("WaitThenRespawn", 1.5f);
-    //     }
-
-    // }
-
-    // void WaitThenRespawn()
-    // {
-    //     transform.position = respawnPos;
-    //     currentHealth = capacityHealth;
-    //     controller.enabled = true;
-    // }
 }

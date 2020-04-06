@@ -82,7 +82,7 @@ public class DialogueManager : MonoBehaviour
                     // If all necessary tags aren't there, this won't work
                     Quest quest = CreateQuest();
                     Debug.Log(quest.ToString());
-                    playerInfo.quests.Add(quest);
+                    playerInfo.quests.Add(quest.Name, quest);
                     break;
                 case null:
                     TextBox.text = inputStream.Dequeue(); // Set dialogue text
