@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1752188049916452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -20.34832, y: 0.9092536, z: -6.007515}
-  m_LocalScale: {x: 7.5497, y: 7.5497, z: 7.5497}
+  m_LocalScale: {x: 7.5497007, y: 7.549698, z: 7.5497017}
   m_Children:
   - {fileID: 4119606981717082}
   - {fileID: 4067738495509626}
@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 33039221488955492}
   - component: {fileID: 23273550922175380}
   - component: {fileID: 136828566481799644}
+  - component: {fileID: 1932501051}
   m_Layer: 0
   m_Name: FallenTree_1_1_LOD0
   m_TagString: Untagged
@@ -146,11 +147,24 @@ CapsuleCollider:
   m_GameObject: {fileID: 1874889580073250}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.27
   m_Height: 3.55
   m_Direction: 0
   m_Center: {x: -0.27397662, y: 0.2, z: 0.03}
+--- !u!65 &1932501051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874889580073250}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3435705, y: 0.50648713, z: 0.40797827}
+  m_Center: {x: -0.27398038, y: 0.22706752, z: 0.01018296}
 --- !u!1 &1922290694309860
 GameObject:
   m_ObjectHideFlags: 0

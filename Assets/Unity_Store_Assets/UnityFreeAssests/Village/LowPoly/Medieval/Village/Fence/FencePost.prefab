@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5438684731711950325}
   - component: {fileID: 5438684731711950326}
   - component: {fileID: 5438684731711950328}
+  - component: {fileID: 3297775270049905608}
   m_Layer: 0
   m_Name: FencePost
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5438684731711950329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.3551064, y: 7.3551054, z: 7.3551064}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -89,8 +90,21 @@ MeshCollider:
   m_GameObject: {fileID: 5438684731711950329}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 5124dc9f355e05542acf9b03f1a91c58, type: 2}
+--- !u!65 &3297775270049905608
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438684731711950329}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.30000016, y: 1.2500002, z: 0.25980774}
+  m_Center: {x: 0.000000055879354, y: 0.6250154, z: -0.0000009443611}
