@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33363945204356442}
   - component: {fileID: 23950877776849094}
   - component: {fileID: 3101309879363635823}
+  - component: {fileID: 2854048078714457256}
   m_Layer: 0
   m_Name: SNature_MossRocks1
   m_TagString: Untagged
@@ -89,8 +90,21 @@ MeshCollider:
   m_GameObject: {fileID: 1468190808596880}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: e875f5a6ac7c1b24bb9e5195eb81c6d3, type: 3}
+--- !u!65 &2854048078714457256
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468190808596880}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0908058, y: 2.6126812, z: 0.97501904}
+  m_Center: {x: 0.008158354, y: 1.2254624, z: -0.3616435}
