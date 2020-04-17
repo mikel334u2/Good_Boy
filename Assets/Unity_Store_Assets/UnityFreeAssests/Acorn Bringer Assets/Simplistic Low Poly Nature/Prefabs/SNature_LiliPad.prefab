@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33845672566661186}
   - component: {fileID: 23772591389640614}
   - component: {fileID: 8223729111793150193}
+  - component: {fileID: 1026037288}
   m_Layer: 0
   m_Name: SNature_LiliPad
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1991322978864050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2885, y: 2.2885, z: 2.2885}
+  m_LocalScale: {x: 3.7357225, y: 3.7357225, z: 3.7357225}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,3 +95,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 5c2114581c943b04089fac62f6805630, type: 3}
+--- !u!114 &1026037288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991322978864050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3928970ffeef8174fa21b21a8af16cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesPerSecond: 9
+  amplitude: 0.2
+  frequency: 0.8

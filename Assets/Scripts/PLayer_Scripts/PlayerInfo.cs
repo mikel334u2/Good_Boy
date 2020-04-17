@@ -106,7 +106,7 @@ public class PlayerInfo : MonoBehaviour
     {
         controller.grounded = true;
         controller.enabled = false;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.1f);
         controller.enabled = true;
         transform.position = respawn.transform.position;
     }
