@@ -13,7 +13,7 @@ public class PlayerInfo : MonoBehaviour
     // public bool respawn = true;
     // public Vector3 respawnPos = new Vector3(0, 0, 0);
     private M_PlayerController controller;
-    public M_Camera camera;
+    public M_Camera m_camera;
     private GameObject respawn;
     [HideInInspector] public Dictionary<string, Quest> quests = new Dictionary<string, Quest>();
     public Text questText;
@@ -39,7 +39,7 @@ public class PlayerInfo : MonoBehaviour
         if (Input.GetButtonDown("e"))
         {
             controller.zeroMovement = !controller.zeroMovement;
-            camera.isRotatable = !camera.isRotatable;
+            m_camera.isRotatable = !m_camera.isRotatable;
             questText.text = quests.ContainsKey("Breaking Out") ? ("(" + (quests["Breaking Out"].Completed ? 'X' : ' ') + ")\tBreaking Out") : null;
             questText.gameObject.SetActive(!questText.gameObject.activeSelf);
         }
@@ -106,7 +106,7 @@ public class PlayerInfo : MonoBehaviour
     {
         controller.grounded = true;
         controller.enabled = false;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.1f);
         controller.enabled = true;
         transform.position = respawn.transform.position;
     }
