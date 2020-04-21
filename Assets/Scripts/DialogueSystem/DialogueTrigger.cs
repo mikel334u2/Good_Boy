@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Text.RegularExpressions;
+using System.Text;
 
 /********************
  * DIALOGUE TRIGGER *
@@ -15,7 +16,7 @@ using System.Text.RegularExpressions;
  * 
  * Text file example is found in SampleDialogue.txt
  * Special characters: left bracket [ , right bracket ] , 2 single-quotes ''
- * Tags: NAME, IMG, QUEST, TYPE, TAG, NUM, DESC
+ * Tags: NAME, IMG, QUEST, DESC, COLLECT, GOAL, DESTROY, BREAK, END, CLEAR
  */
 
 public class DialogueTrigger : MonoBehaviour
@@ -55,36 +56,25 @@ public class DialogueTrigger : MonoBehaviour
 
         foreach (string line in lines) // for every line of dialogue
         {
-            SearchAndQueueTag(line, "NAME"); // adds [NAME=Michael] to be printed
-            SearchAndQueueTag(line, "IMG"); // adds [IMG=Images/chester] to be processed
-            if (SearchAndQueueTag(line, "QUEST")) // if QUEST is found, adds [QUEST=Quest Name] and returns true
+            StringBuilder sb = new StringBuilder(line); // Helps improve efficiency
+            SearchAndQueueTag(sb, "NAME"); // adds [NAME=Michael] to be printed
+            SearchAndQueueTag(sb, "IMG"); // adds [IMG=Images/chester] to be processed
+            if (SearchAndQueueTag(sb, "QUEST")) // if QUEST is found, adds [QUEST=Quest Name] and returns true
             {
-                SearchAndQueueTag(line, "DESC"); // [DESC=Your job is to collect 3 apples.]
+                SearchAndQueueTag(sb, "DESC"); // [DESC=Your job is to collect 3 apples.]
                 foreach (string type in Enum.GetNames(typeof(QuestType))) // {Collect, Goal, ...}
                 {
-                    if (SearchAndQueueTag(line, type.ToUpper()))
+                    if (SearchAndQueueTag(sb, type.ToUpper()))
                         break; // If tag found, queue it and break
                 }
             }
-            
-            // Queue the actual dialogue
-            int start = line.LastIndexOf(']') + 1;
-            dialogue.Enqueue(line.Substring(start).Trim());
 
-            // // If there's an [END] tag, queue the dialogue then the [END] tag
-            // if (line.Contains("[END]"))
-            // {
-            //     int start = line.LastIndexOf(']', line.IndexOf("[END]")) + 1;
-            //     int end = line.IndexOf("[END]");
-            //     dialogue.Enqueue(line.Substring(start, end - start).Trim());
-            //     dialogue.Enqueue("[END]");
-            // }
-            // else // Else, just queue the dialogue
-            // {
-            //     int start = line.LastIndexOf(']') + 1;
-            //     dialogue.Enqueue(line.Substring(start).Trim());
-            // }
-            dialogue.Enqueue("[BREAK=]"); // breaks up the lines
+            QueueActualDialogue(sb.ToString());  // Queue the actual dialogue
+            SearchAndQueueTag(sb, "CLEAR");
+            SearchAndQueueTag(sb, "DESTROY");
+            SearchAndQueueTag(sb, "END");
+
+            dialogue.Enqueue("[BREAK]"); // breaks up the lines
         }
     }
 
@@ -104,19 +94,47 @@ public class DialogueTrigger : MonoBehaviour
 
     /*
      * Searches for a tag in the line.
-     * If found, add it to dialogue and return true.
+     * If found, add it to dialogue, remove it, and return true.
      * Else, return false
      */
-    private bool SearchAndQueueTag(string line, string tag)
+    private bool SearchAndQueueTag(StringBuilder sb, string tag)
     {
+        string line = sb.ToString();
         string tagPattern = @"\[\s*" + tag + @"\s*=[^\[\]]*\]";
-        Match match = Regex.Match(line, tagPattern);
-        if (match.Success) // If there's a match for [TAG=something]
+        string noEqualsPattern = @"\[\s*" + tag + @"\s*\]";
+        Match matchTag = Regex.Match(line, tagPattern);
+        Match noEqualsTag = Regex.Match(line, noEqualsPattern);
+        if (matchTag.Success) // If there's a match for [TAG=something]
         {
-            dialogue.Enqueue(match.Value);
+            sb.Remove(matchTag.Index, matchTag.Length);
+            dialogue.Enqueue(matchTag.Value);
+            return true;
+        }
+        else if (noEqualsTag.Success) // If the tag is [DESTROY] or something
+        {
+            sb.Remove(noEqualsTag.Index, noEqualsTag.Length);
+            string newTag = noEqualsTag.Value.TrimEnd(']') + "=]";
+            dialogue.Enqueue(newTag);
             return true;
         }
         return false;
+    }
+
+    // Queues the actual dialogue
+    private void QueueActualDialogue(string line)
+    {
+        // Matches any text outside of tags
+        string actualDialoguePattern = @"[^\]]+(?![^\[]*\])";
+        Match match = Regex.Match(line, actualDialoguePattern);
+        do  // Matches until the match value is non-whitespace (first match)
+        {
+            if (!String.IsNullOrWhiteSpace(match.Value))
+            {
+                dialogue.Enqueue(match.Value.Trim());
+                return;
+            }
+            match = match.NextMatch();
+        } while (match.Success);
     }
 
 
@@ -137,7 +155,7 @@ public class DialogueTrigger : MonoBehaviour
             if (!TriggerWithButton) // If dialogue triggered on collision
             {
                 ReadTextFile();
-                dialogueManager.StartDialogue(dialogue);
+                dialogueManager.StartDialogue(dialogue, this);
                 nextTime = Time.timeSinceLevelLoad + waitTime;
                 dialogueTriggered = true;
             }
@@ -160,7 +178,7 @@ public class DialogueTrigger : MonoBehaviour
             else // Else, start the dialogue
             {
                 ReadTextFile();
-                dialogueManager.StartDialogue(dialogue);
+                dialogueManager.StartDialogue(dialogue, this);
                 dialogueTriggered = true;
                 if (indicator != null)
                 {

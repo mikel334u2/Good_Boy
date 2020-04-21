@@ -25,6 +25,8 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> inputStream = new Queue<string>(); // stores dialogue
     private M_PlayerController pController; // used for freezing player
     private PlayerInfo playerInfo; // does stuff like add quests
+    private DialogueTrigger triggerObject;
+    private bool destroyTrigger = false;
 
     private void Start()
     {
@@ -33,8 +35,9 @@ public class DialogueManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").TryGetComponent<PlayerInfo>(out playerInfo);
     }
 
-    public void StartDialogue(Queue<string> dialogue)
+    public void StartDialogue(Queue<string> dialogue, DialogueTrigger triggerObject)
     {
+        this.triggerObject = triggerObject;
         if (freezePlayerOnDialogue)
         {
             pController.zeroMovement = true; // disable player controller
@@ -55,9 +58,14 @@ public class DialogueManager : MonoBehaviour
         {
             pController.zeroMovement = false; // enable player controller
         }
+        if (destroyTrigger) // if it's a one-time dialogue, disable the DialogueTrigger
+        {
+            triggerObject.enabled = false;
+        }
     }
 
-    public void AdvanceDialogue() // call when a player presses a button in Dialogue Trigger
+    // call when a player presses a button in Dialogue Trigger
+    public void AdvanceDialogue()
     {
         // Debug.Log("Advancing dialogue");
         if (inputStream.Count <= 0)
@@ -65,7 +73,11 @@ public class DialogueManager : MonoBehaviour
             EndDialogue(); // End the dialogue if it's over
             return;
         }
+
         // Debug.Log(inputStream.Peek() + " -- " + CheckNextTag());
+        // Processes the tags and dialogue between breaks
+        bool endDialogue = false;
+        bool hasNormalDialogue = false;
         string tagTitle = CheckNextTag();
         while (tagTitle != "BREAK")
         {
@@ -86,14 +98,34 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case null:
                     TextBox.text = inputStream.Dequeue(); // Set dialogue text
+                    hasNormalDialogue = true;
+                    break;
+                case "CLEAR":   // Clears dialogue textbox without advancing dialogue
+                    TextBox.text = "";
+                    hasNormalDialogue = true;
+                    inputStream.Dequeue();
+                    break;
+                case "DESTROY": // Deactivates the DialogueTrigger so subsequent interactions cannot occur
+                    destroyTrigger = true;
+                    endDialogue = true;
+                    inputStream.Dequeue();
+                    break;
+                case "END":     // Force ends the dialogue
+                    endDialogue = true;
+                    inputStream.Dequeue();
                     break;
             }
             tagTitle = CheckNextTag();
         }
         inputStream.Dequeue();
-        if (inputStream.Count <= 0)
+
+        if (endDialogue) // if tag ends dialogue, clear the queue
         {
-            EndDialogue();
+            inputStream.Clear();
+        }
+        if (!hasNormalDialogue) // in case there's no actual dialogue in a line
+        {
+            AdvanceDialogue();
         }
     }
 
