@@ -53,56 +53,7 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 
-    // public void PrintQuest(int i)
-    // {
-    //     StringBuilder sb = new StringBuilder();
-    //     sb.Append(quests[i].ToString());
-    //     questText.text = sb.ToString().TrimEnd();
-    // }
-
-    // public void PrintFriends()
-    // {
-    //     StringBuilder sb = new StringBuilder();
-    //     foreach (string friend in friends)
-    //     {
-    //         sb.Append(friend).Append('\n');
-    //     }
-    //     friendsList.text = sb.ToString().TrimEnd();
-    // }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Death")
-        {
-            StartCoroutine("Respawn");
-        }
-        foreach (Quest quest in quests.Values)
-        {
-            if (quest.Completed) continue; // Do not check completed quests
-            
-            // If it's a collecting quest item, collect the item
-            if (quest.Type == QuestType.Collect && other.gameObject.tag == quest.TagOfItem)
-            {
-                quest.CurrentItems++;
-                if (quest.CurrentItems >= quest.RequiredItems)
-                {
-                    quest.Completed = true;
-                    // [TODO] Display some congratulations message for collecting all items
-                }
-                Destroy(other.gameObject);
-            }
-
-            // If it's a goal area, complete that quest
-            else if (quest.Type == QuestType.Goal && other.name == quest.NameOfGoal)
-            {
-                quest.Completed = true;
-                Debug.Log("Goal reached.");
-                // [TODO] Display congratulations message for reaching goal
-            }
-        }
-    }
-
-    IEnumerator Respawn()
+    public IEnumerator Respawn()
     {
         controller.grounded = true;
         controller.enabled = false;

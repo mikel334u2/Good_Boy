@@ -74,7 +74,7 @@ public class DialogueTrigger : MonoBehaviour
             SearchAndQueueTag(sb, "DESTROY");
             SearchAndQueueTag(sb, "END");
 
-            dialogue.Enqueue("[BREAK]"); // breaks up the lines
+            dialogue.Enqueue("[BREAK=]"); // breaks up the lines
         }
     }
 
@@ -106,12 +106,14 @@ public class DialogueTrigger : MonoBehaviour
         Match noEqualsTag = Regex.Match(line, noEqualsPattern);
         if (matchTag.Success) // If there's a match for [TAG=something]
         {
+            // Debug.Log(matchTag.Value);
             sb.Remove(matchTag.Index, matchTag.Length);
             dialogue.Enqueue(matchTag.Value);
             return true;
         }
         else if (noEqualsTag.Success) // If the tag is [DESTROY] or something
         {
+            // Debug.Log(noEqualsTag.Value);
             sb.Remove(noEqualsTag.Index, noEqualsTag.Length);
             string newTag = noEqualsTag.Value.TrimEnd(']') + "=]";
             dialogue.Enqueue(newTag);

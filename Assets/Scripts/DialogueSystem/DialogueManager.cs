@@ -81,6 +81,7 @@ public class DialogueManager : MonoBehaviour
         string tagTitle = CheckNextTag();
         while (tagTitle != "BREAK")
         {
+            Debug.Log(inputStream.Peek());
             switch (tagTitle)
             {
                 case "NAME":    // Set the name of character speaking
