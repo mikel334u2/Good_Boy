@@ -57,15 +57,15 @@ public class keyCollect : MonoBehaviour
 
     private void AddSticker()
     {
-        if(!key1.activeInHierarchy)
+        if(!sticker1.activeInHierarchy)
         {
             sticker1.SetActive(true);
         }
-        else if (!key2.activeInHierarchy)
+        else if (!sticker2.activeInHierarchy)
         {
             sticker2.SetActive(true);
         }
-        else if (!key3.activeInHierarchy)
+        else if (!sticker3.activeInHierarchy)
         {
             sticker3.SetActive(true);
         }
