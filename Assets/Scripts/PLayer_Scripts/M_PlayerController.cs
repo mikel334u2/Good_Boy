@@ -81,7 +81,7 @@ public class M_PlayerController : MonoBehaviour
         {
             DoJump();
         }
-        DoAttack();
+        //DoAttack();
 
         HandleMovement();
         // Debug.Log(velocity);
@@ -249,14 +249,14 @@ public class M_PlayerController : MonoBehaviour
             }
         }
     }
-    void DoAttack()
+    /*void DoAttack()
     {
         if (Input.GetButtonDown("Fire1") && grounded)
         {
             animator.SetTrigger("Attack");
         }
         
-    }
+    }*/
     void HandleMovement()
     {
         zeroVelocityXZ(); // zero velocity if zeroMovement is true
