@@ -1,0 +1,30 @@
+[NAME=Cooper][IMG=Dialogue/cooper]Hey, why did the gate close?
+''
+[NAME=Chess][IMG=Dialogue/chess]Sorry, pup, but I needed to be sure you wouldn’t run. It’s happened before…
+''
+Anyways, I lead you here for a reason. 
+''
+[NAME=Cooper][IMG=Dialogue/cooper]And… what reason is that…?
+''
+[NAME=Chess][IMG=Dialogue/chess]Oh, it’s nothing nefarious, you can bring your tail back up.
+''
+We… we need your help.
+''
+[NAME=Cooper][IMG=Dialogue/cooper]...huh?
+''
+[NAME=Chess][IMG=Dialogue/chess]A few of our kittens disappeared a week ago. All of us have ventured out to find them, with no luck. 
+''
+All of the other animals we approached turned us away, and the dogs would either run or attack. 
+''
+You, however… You’re new. You did neither of those things. You have the unique canine perspective we may need.
+''
+And with your worth proved on the way here, you were the ideal candidate.
+''
+Please Cooper… will you help us find them?
+''
+[NAME=Cooper][IMG=Dialogue/cooper]...
+''
+I’ve… never worked with cats before...
+''
+But I’ve never turned down a friend in need! I’m a Good Boy, so I’ll help you however I can!
+
