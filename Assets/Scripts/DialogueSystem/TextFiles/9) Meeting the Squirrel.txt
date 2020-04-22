@@ -1,0 +1,20 @@
+[NAME=Squirrel][IMG=Dialogue/squirrel]Hey, get lost mutt! This is my shiny thing, and I'm not sharin'!
+''
+[NAME=Cooper][IMG=Dialogue/cooper]That shiny thing is a key I need. Can I have it, please?
+''
+[NAME=Squirrel][IMG=Dialogue/squirrel]A key, huh? I thought it looked weird.
+''
+If ya want it, you'll have to trade for it!
+''
+[NAME=Cooper][IMG=Dialogue/cooper]Okay. What do you want for it?
+''
+[NAME=Squirrel][IMG=Dialogue/squirrel]Hmm... I like shiny things, in case ya couldn't tell. 
+''
+There's a bunch of shiny things all over the forest, but as much as I want 'em, food takes priority.
+''
+So how's about... you find me 50 of those coins layin' around?
+''
+[NAME=Cooper][IMG=Dialogue/cooper]Okay, I can do that. Be back soon!
+''
+[QUEST=Shiny Things][DESC=Collect 50 coins for the squirrel.][COLLECT=Coin,50]
+
