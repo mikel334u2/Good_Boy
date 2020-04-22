@@ -45,6 +45,8 @@ public class M_PlayerController : MonoBehaviour
     // Gravity
     public float grav = 9.81f;
     public bool grounded = false;
+    public bool jumping = false; //Maria tEST
+    public bool twerking = false; // MARIA TEST AGAIN
     public bool canJump = true;
     [HideInInspector] public Animator animator; //TEST used to be private
     public float raycastDist = .2f;
@@ -106,6 +108,24 @@ public class M_PlayerController : MonoBehaviour
     {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1);
+
+        //test
+        if(Input.GetKeyDown("space")==true){
+            jumping = true;
+            animator.SetBool("Jumping", jumping);        
+        }else{
+            jumping = false;
+            animator.SetBool("Jumping", jumping); 
+        }
+        if(Input.GetKey("t") == true){
+            twerking = true;
+            animator.SetBool("Twerking", twerking); 
+        }else{
+            twerking = false;
+            animator.SetBool("Twerking", twerking); 
+        }
+
+        //twerking test
     }
     
     // sets variables representing the orientation of the camera
@@ -244,10 +264,12 @@ public class M_PlayerController : MonoBehaviour
             velocity.x = 0;
             velocity.z = 0;
             canJump = false;
+           
         }
         else
         {
             canJump = true;
+            
         }
     }
     
