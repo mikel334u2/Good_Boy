@@ -12,6 +12,7 @@ TagManager:
   - Death
   - NPC
   - Moths
+  - Sticker
   layers:
   - Default
   - TransparentFX
