@@ -1797,9 +1797,11 @@ GameObject:
   - component: {fileID: 114306267886315038}
   - component: {fileID: 114210507595430992}
   - component: {fileID: 195392007921826444}
+  - component: {fileID: 882724883}
+  - component: {fileID: 882724884}
   m_Layer: 0
   m_Name: Cat Black
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1990,23 +1992,9 @@ MonoBehaviour:
     minStateTime: 20
     maxStateTime: 40
     stateWeight: 3
-  movementStates:
-  - stateName: Walking
-    animationBool: isWalking
-    maxStateTime: 20
-    moveSpeed: 2
-    turnSpeed: 120
-  - stateName: Running
-    animationBool: isRunning
-    maxStateTime: 5
-    moveSpeed: 10
-    turnSpeed: 200
-  attackingStates:
-  - stateName: Attack
-    animationBool: isAttacking
-  deathStates:
-  - stateName: Dead
-    animationBool: isDead
+  movementStates: []
+  attackingStates: []
+  deathStates: []
   species: Cat
   stats: {fileID: 11400000, guid: dbe9e93337452e549825f00a2450fc95, type: 2}
   wanderZone: 5
@@ -2055,6 +2043,37 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &882724883
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904107386653458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.58
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &882724884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904107386653458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06309f65637a444ab311baaefe82e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFileAssets:
+  - {fileID: 4900000, guid: c0b21724b1bbafd4f85dcea64172cbc8, type: 3}
+  TriggerWithButton: 0
+  optionalButtonIndicator: {fileID: 0}
+  optionalIndicatorOffset: {x: 0, y: 0, z: 0}
+  button: Jump
 --- !u!1 &1926030801303212
 GameObject:
   m_ObjectHideFlags: 0

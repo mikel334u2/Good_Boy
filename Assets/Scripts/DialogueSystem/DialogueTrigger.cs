@@ -34,6 +34,7 @@ public class DialogueTrigger : MonoBehaviour
     private GameObject indicator;
     private DialogueManager dialogueManager;
     private PlayerInfo player;
+    [HideInInspector] public bool isDisabled = false;
     private string[] Separators = {"\'\'"}; // splits the dialogue by 2 single quotes
 
     private void Start()
@@ -142,7 +143,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (!isDisabled && other.gameObject.tag == "Player")
         {
             if (player == null)
             {
@@ -170,7 +171,7 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // If player pressed button while colliding with other, then show dialogue
-        if (other.gameObject.tag == "Player" && Input.GetButton(button) && nextTime < Time.timeSinceLevelLoad)
+        if (!isDisabled && other.gameObject.tag == "Player" && Input.GetButton(button) && nextTime < Time.timeSinceLevelLoad)
         {
             nextTime = Time.timeSinceLevelLoad + waitTime; // reset waiting period before advancing dialogue
             if (dialogueTriggered) // if dialogue triggered already, advance dialogue
