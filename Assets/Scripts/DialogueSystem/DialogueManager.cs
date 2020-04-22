@@ -58,10 +58,7 @@ public class DialogueManager : MonoBehaviour
         {
             pController.zeroMovement = false; // enable player controller
         }
-        if (destroyTrigger) // if it's a one-time dialogue, disable the DialogueTrigger
-        {
-            triggerObject.enabled = false;
-        }
+        triggerObject.isDisabled = destroyTrigger; // if it's a one-time dialogue, disable the DialogueTrigger
     }
 
     // call when a player presses a button in Dialogue Trigger
@@ -81,7 +78,7 @@ public class DialogueManager : MonoBehaviour
         string tagTitle = CheckNextTag();
         while (tagTitle != "BREAK")
         {
-            Debug.Log(inputStream.Peek());
+            // Debug.Log(inputStream.Peek());
             switch (tagTitle)
             {
                 case "NAME":    // Set the name of character speaking

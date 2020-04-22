@@ -24,5 +24,4 @@ You'll be back in no time at all. I'm sure your human wouldn't object to you hav
 ''
 Because I’m feeling... generous, I’ll give you a hint, pup. It looks like this section of fence here is loose.
 ''
-[QUEST=Breaking Out][DESC=Get past the fence somehow.][GOAL=FenceGoal]
-
+[QUEST=Breaking Out][DESC=Get past the fence somehow.][GOAL=FenceGoal][DESTROY]
