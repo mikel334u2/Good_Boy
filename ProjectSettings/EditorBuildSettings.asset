@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Good_Boy_Updated.unity
     guid: 8d46d31251eca433a91c716d46a5da9e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UI_Mockup/GameScene_UI.unity
     guid: 23a3d3d385b1e4c35aa45b3f3480bd8c
   m_configObjects: {}
