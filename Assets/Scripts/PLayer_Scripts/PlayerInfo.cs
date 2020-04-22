@@ -13,7 +13,7 @@ public class PlayerInfo : MonoBehaviour
     // public bool respawn = true;
     // public Vector3 respawnPos = new Vector3(0, 0, 0);
     private M_PlayerController controller;
-    private M_Camera m_camera;
+    public M_Camera m_camera;
     private GameObject respawn;
     [HideInInspector] public Dictionary<string, Quest> quests = new Dictionary<string, Quest>();
     public Text questText;
@@ -29,10 +29,6 @@ public class PlayerInfo : MonoBehaviour
         {
             Debug.LogError("Attach a player controller to PlayerInfo");
         }
-        if (!GameObject.FindGameObjectWithTag("MainCamera").TryGetComponent<M_Camera>(out m_camera))
-        {
-            Debug.LogError("Attach a player camera to PlayerInfo");
-        }
         respawn = GameObject.FindGameObjectWithTag("Respawn");
         questText.gameObject.SetActive(false);
         transform.position = respawn.transform.position;
@@ -44,19 +40,9 @@ public class PlayerInfo : MonoBehaviour
         {
             controller.zeroMovement = !controller.zeroMovement;
             m_camera.isRotatable = !m_camera.isRotatable;
-            questText.text = PrintQuests();
+            questText.text = quests.ContainsKey("Breaking Out") ? ("(" + (quests["Breaking Out"].Completed ? 'X' : ' ') + ")\tBreaking Out") : null;
             questText.gameObject.SetActive(!questText.gameObject.activeSelf);
         }
-    }
-
-    private string PrintQuests()
-    {
-        StringBuilder sb = new StringBuilder();
-        foreach (Quest q in quests.Values)
-        {
-            sb.Append("(").Append(q.Completed ? "X" : " ").Append(")\t").AppendLine(q.Name);
-        }
-        return sb.ToString().TrimEnd();
     }
 
     public void AddFriend(string friendName)
