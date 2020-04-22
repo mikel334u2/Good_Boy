@@ -46,6 +46,8 @@ public class M_PlayerController : MonoBehaviour
     public float grav = 9.81f;
     public bool grounded = false;
     public bool jumping = false; //Maria tEST
+
+    public bool barking = false; //maria test again numero dos
     public bool twerking = false; // MARIA TEST AGAIN
     public bool canJump = true;
     [HideInInspector] public Animator animator; //TEST used to be private
@@ -120,6 +122,8 @@ public class M_PlayerController : MonoBehaviour
             jumping = false;
             animator.SetBool("Jumping", jumping); 
         }
+        
+        //twerking test
         if(Input.GetKey("t") == true){
             twerking = true;
             animator.SetBool("Twerking", twerking); 
@@ -128,7 +132,14 @@ public class M_PlayerController : MonoBehaviour
             animator.SetBool("Twerking", twerking); 
         }
 
-        //twerking test
+        //barking test
+        if(Input.GetKey("b") == true){
+            barking = true;
+            animator.SetBool("Barking", barking); 
+        }else{
+            barking = false;
+            animator.SetBool("Barking", barking); 
+        }
     }
     
     // sets variables representing the orientation of the camera
