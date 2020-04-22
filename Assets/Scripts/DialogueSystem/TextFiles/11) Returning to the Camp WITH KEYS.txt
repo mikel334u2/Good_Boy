@@ -1,0 +1,7 @@
+[NAME=Chess][IMG=Dialogue/chess]Well, would you look at that! He's got all three keys!
+''
+[NAME=Guard][IMG=Dialogue/guard]Indeed he has. 
+''
+You've passed the trials, Cooper the Corgi. Welcome to the Cat Camp!
+
+

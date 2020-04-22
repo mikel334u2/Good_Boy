@@ -19,7 +19,7 @@ public class FenceBreak : MonoBehaviour
     void Update()
     {
         // Debug.Log(velocity);
-        transform.Translate(velocity);
+        transform.Translate(velocity * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -27,7 +27,7 @@ public class FenceBreak : MonoBehaviour
         if (other.gameObject.tag == "Player" && playerController.sprint)
         {
             GetComponent<Collider>().enabled = false;
-            velocity = playerController.velocity * Time.deltaTime;
+            velocity = playerController.velocity;
         }
     }
 }

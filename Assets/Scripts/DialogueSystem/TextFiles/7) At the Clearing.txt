@@ -1,0 +1,30 @@
+[NAME=Chess][IMG=Dialogue/chess]Pretty, isn't it?
+''
+[NAME=Cooper][IMG=Dialogue/cooper]Ooh, yeah! Look at all the flowers!
+''
+[NAME=Chess][IMG=Dialogue/chess]This clearing is a nice little retreat for members of the Camp.
+''
+[NAME=Cooper][IMG=Dialogue/cooper]Camp?
+''
+[NAME=Chess][IMG=Dialogue/chess]The Cat Camp, yes. We live here in these woods, hidden from humans.
+''
+[NAME=Cooper][IMG=Dialogue/cooper]Why would you hide from humans? They're really nice, especially my human!
+''
+[NAME=Chess][IMG=Dialogue/chess]Not all humans are nice, pup... but oh, many come for the freedom it offers.
+''
+Most of us like to be close to our more wild roots. 
+''
+It's a shame only cats are allowed, it really is quite nice...
+''
+[NAME=Cooper][IMG=Dialogue/cooper]Aw, I want to see the Camp... It sounds really cool!
+''
+[NAME=Chess][IMG=Dialogue/chess]Oh, I'm not sure... dogs are notorious for being mean to cats, after all.
+''
+[NAME=Cooper][IMG=Dialogue/cooper]I'll be on my best behavior! Promise! Please, Chess?
+''
+[NAME=Chess][IMG=Dialogue/chess]...oh alright, pup. You've certainly convinced me. I'll lead you there, but you'll have to convince the Camp as well.
+''
+Just keep following the path.
+''
+[QUEST=A Feline Encampment][DESC=Enter the Cat Camp.][GOAL=CampGoal]
+
