@@ -4,6 +4,6 @@ The tops of this little maze here are perfect lounging spots, however. They get 
 ''
 For now, though, just head on through. We shouldn’t linger too long, if you want to get to your human again soon.
 ''
-[QUEST=The Rock Maze][DESC=Find a way through the maze.][GOAL=MazeGoal]
+[QUEST=The Rock Maze][DESC=Find a way through the maze.][GOAL=MazeGoal][DESTROY]
 
 

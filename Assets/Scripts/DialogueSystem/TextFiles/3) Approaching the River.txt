@@ -8,4 +8,4 @@ Though the water looks placid, the current is fast. You’d be able to get back 
 ''
 That said... good luck traversing the rapids, pup. 
 ''
-[QUEST=River Rapids][DESC=Cross the river.][GOAL=RiverGoal]
+[QUEST=River Rapids][DESC=Cross the river.][GOAL=RiverGoal][DESTROY]
