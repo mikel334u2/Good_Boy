@@ -109,6 +109,9 @@ public class M_PlayerController : MonoBehaviour
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1);
 
+        if (zeroMovement)
+            return;
+
         //test
         if(Input.GetKeyDown("space")==true){
             jumping = true;
