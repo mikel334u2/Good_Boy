@@ -1,0 +1,9 @@
+[NAME=Chess][IMG=Dialogue/chess]A rock slide happened a while back and left this behind. 
+''
+The tops of this little maze here are perfect lounging spots, however. They get ample sun coverage nearly year-round. 
+''
+For now, though, just head on through. We shouldn’t linger too long, if you want to get to your human again soon.
+''
+[QUEST=The Rock Maze][DESC=Find a way through the maze.][GOAL=MazeGoal]
+
+
