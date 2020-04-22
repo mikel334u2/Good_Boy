@@ -13,4 +13,7 @@ public class SwitchLevel : MonoBehaviour
         SceneManager.LoadScene(levelToLoad);
 
     }
+    private void OnTriggerEnter(Collider other){
+    	 SceneManager.LoadScene(levelToLoad);
+    }
 }
