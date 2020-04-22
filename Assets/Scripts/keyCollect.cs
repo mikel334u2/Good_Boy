@@ -11,9 +11,9 @@ public class keyCollect : MonoBehaviour
     public GameObject sticker3;
     public GameObject sticker2;
     public GameObject sticker1;
-    public GameObject moth1;
+   /* public GameObject moth1;
     public GameObject moth2;
-    public GameObject moth3;
+    public GameObject moth3;*/
 	
 	
 	 void Start()
@@ -24,9 +24,9 @@ public class keyCollect : MonoBehaviour
         sticker3.SetActive(false);
         sticker2.SetActive(false);
         sticker1.SetActive(false);
-        moth1.SetActive(false);
+        /*moth1.SetActive(false);
         moth2.SetActive(false);
-        moth3.SetActive(false);
+        moth3.SetActive(false);*/
         
     }
 
@@ -79,7 +79,7 @@ public class keyCollect : MonoBehaviour
         
     }
     
-    private void AddMoth()
+   /* private void AddMoth()
     {
         if(!moth1.activeInHierarchy)
         {
@@ -94,5 +94,5 @@ public class keyCollect : MonoBehaviour
             moth3.SetActive(true);
         }
         
-    }
+    }*/
 }
