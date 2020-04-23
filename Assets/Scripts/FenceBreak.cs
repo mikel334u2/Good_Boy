@@ -29,7 +29,7 @@ public class FenceBreak : MonoBehaviour
                 c.enabled = false;
             }
             velocity = playerController.velocity;
-            Debug.Log("Player controller velocity: " + playerController.velocity);
+            // Debug.Log("Player controller velocity: " + playerController.velocity);
             if (velocity.y <= 0)
                 velocity.y = -velocity.y;
             Destroy(gameObject, 15f);

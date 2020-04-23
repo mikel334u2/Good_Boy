@@ -88,7 +88,7 @@ public class M_PlayerController : MonoBehaviour
         //DoAttack();
 
         HandleMovement();
-        Debug.Log(velocity);
+        // Debug.Log(velocity);
         
         if (Input.GetButtonDown("Sprint") && sprint == false){
         	sprint = true;
