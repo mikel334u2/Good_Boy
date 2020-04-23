@@ -1,6 +1,0 @@
-[NAME=Chess][IMG=Dialogue/chess]I see you're smarter than you look. Welcome to the forest, pup. 
-''
-Come along this path and I'll show you around.
-''
-[QUEST=Welcome to the Wood][DESC=Explore!][GOAL=EndGoal]
-

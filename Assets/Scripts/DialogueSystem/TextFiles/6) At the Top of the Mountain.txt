@@ -1,5 +1,0 @@
-[NAME=Chess][IMG=Dialogue/chess]Lovely view, isn't it?
-''
-[NAME=Cooper][IMG=Dialogue/cooper]It sure is, Chess... I don't think I've ever been so high up!
-
-

@@ -1,0 +1,11 @@
+[NAME=Chess][IMG=Dialogue/chess_smirk]I'm afraid because of your... canine stature, you will not be able to cross using the trees like myself.
+''
+[NAME=Cooper][IMG=Dialogue/cooper_grin]That's okay! I'm a pretty good swimmer.
+''
+[NAME=Chess][IMG=Dialogue/chess]I'd avoid it if I were you. 
+''
+Though the water looks placid, the current is fast. You’d be able to get back to shore should you fall in, but you’d be swept away if you tried to cross that way.
+''
+[NAME=Chess][IMG=Dialogue/chess_smirk]That said... good luck traversing the rapids, pup. 
+''
+[QUEST=River Rapids][DESC=Cross the river.][GOAL=RiverGoal]
