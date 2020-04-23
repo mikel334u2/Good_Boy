@@ -26,5 +26,8 @@ Because I’m feeling... generous, I’ll give you a hint, pup. It looks like a 
 ''
 [QUEST=Breaking Out][DESC=Get past the fence somehow.][GOAL=FenceGoal]
 
+<<<<<<< HEAD:Assets/DialogueText/1) First Interaction with Chess.txt
 
 
+=======
+>>>>>>> 3324193454496d03ca8f904627c78020390da08a:Assets/Scripts/DialogueSystem/TextFiles/1) First Interaction with Chess.txt
