@@ -11,11 +11,24 @@ public class QuestItem : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.TryGetComponent<PlayerInfo>(out player);
-            Quest quest = player.quests[questName];
+            PlayerInfo player = PlayerInfo.Player;
+
+            // for the coin quest
+            if (questName.Equals(player.nameOfCoinQuest))
+            {
+                player.coinCount++;
+                player.scoreText.text = player.coinCount.ToString();
+                Destroy(gameObject);
+            }
+
+            Quest quest = null;
+            if (player.quests.ContainsKey(questName))
+            {
+                quest = player.quests[questName];
+            }
 
             // Do not check completed quests
-            if (quest.Completed)
+            if (quest == null || quest.Completed)
                 return;
             
             switch (quest.Type)
@@ -27,7 +40,7 @@ public class QuestItem : MonoBehaviour
                         quest.Completed = true;
                         // [TODO] Display some congratulations message for collecting all items
                     }
-                    Destroy(other.gameObject);
+                    Destroy(gameObject);
                     break;
                 case QuestType.Goal:
                     quest.Completed = true;

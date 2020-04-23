@@ -27,7 +27,11 @@ public class ActivationTrigger : MonoBehaviour
 
     private bool CheckKeys()
     {
-        Quest quest = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInfo>().quests["The Keys to Success"];
+        Quest quest = null;
+        if (PlayerInfo.Player.quests.ContainsKey("The Keys to Success"))
+        {
+            quest = PlayerInfo.Player.quests["The Keys to Success"];
+        }
         return quest != null && quest.Completed;
     }
 }

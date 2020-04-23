@@ -24,7 +24,6 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> inputStream = new Queue<string>(); // stores dialogue
     private M_PlayerController pController; // used for freezing player
-    private PlayerInfo playerInfo; // does stuff like add quests
     private DialogueTrigger triggerObject;
     private bool destroyTrigger = false;
 
@@ -32,7 +31,6 @@ public class DialogueManager : MonoBehaviour
     {
         CanvasBox.SetActive(false); // close the dialogue box on play
         GameObject.FindGameObjectWithTag("Player").TryGetComponent<M_PlayerController>(out pController);
-        GameObject.FindGameObjectWithTag("Player").TryGetComponent<PlayerInfo>(out playerInfo);
     }
 
     public void StartDialogue(Queue<string> dialogue, DialogueTrigger triggerObject)
@@ -92,7 +90,7 @@ public class DialogueManager : MonoBehaviour
                     // If all necessary tags aren't there, this won't work
                     Quest quest = CreateQuest();
                     Debug.Log(quest.ToString());
-                    playerInfo.quests.Add(quest.Name, quest);
+                    PlayerInfo.Player.quests.Add(quest.Name, quest);
                     break;
                 case null:
                     TextBox.text = inputStream.Dequeue(); // Set dialogue text

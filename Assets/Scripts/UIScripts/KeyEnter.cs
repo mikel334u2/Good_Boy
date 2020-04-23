@@ -15,6 +15,7 @@ public class KeyEnter : MonoBehaviour
      void Update() {
          if(Input.GetButtonDown(inputName))
          {
+             Debug.Log("Pressing " + inputName);
              buttonMe.onClick.Invoke();
          }
              

@@ -8,7 +8,7 @@ public class Death : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            IEnumerator coroutine = other.gameObject.GetComponent<PlayerInfo>().Respawn();
+            IEnumerator coroutine = PlayerInfo.Player.Respawn();
             StartCoroutine(coroutine);
         }
     }

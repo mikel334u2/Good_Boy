@@ -6,7 +6,19 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
+    [Tooltip("Quest items can be selected with description")]
+    [SerializeField] private GameObject questButtonPrefab;
+    [Tooltip("Layout panel where quest items will go")]
+    [SerializeField] private Transform questPanel;
+    [Tooltip("Description textbox for each quest")]
+    [SerializeField] private Text questDescription;
 
+    // COIN QUEST
+    public string nameOfCoinQuest = "Shiny Things";
+    public Text scoreText;
+    [HideInInspector] public int coinCount = 0;
+
+    [HideInInspector] public bool questPrinted = false;
     [HideInInspector] public List<string> friends;
     //public float currentHealth = 3;
     //public float capacityHealth = 3;
@@ -16,9 +28,20 @@ public class PlayerInfo : MonoBehaviour
     private M_Camera m_camera;
     private GameObject respawn;
     [HideInInspector] public Dictionary<string, Quest> quests = new Dictionary<string, Quest>();
-    public Text questText;
+    // public Text questText;
     // public Text friendsList;
     // public Text questMessage;
+
+    // Singleton pattern
+    private static PlayerInfo _instance;
+    public static PlayerInfo Player { get { return _instance; } }
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+            Destroy(this.gameObject);
+        else
+            _instance = this;
+    }
 
     private void Start()
     {
@@ -34,29 +57,51 @@ public class PlayerInfo : MonoBehaviour
             Debug.LogError("Attach a player camera to PlayerInfo");
         }
         respawn = GameObject.FindGameObjectWithTag("Respawn");
-        questText.gameObject.SetActive(false);
+        // questText.gameObject.SetActive(false);
         transform.position = respawn.transform.position;
+
+        // [TODO] INITIALIZE UI TO FALSE
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("e"))
-        {
-            controller.zeroMovement = !controller.zeroMovement;
-            m_camera.isRotatable = !m_camera.isRotatable;
-            questText.text = PrintQuests();
-            questText.gameObject.SetActive(!questText.gameObject.activeSelf);
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetButtonDown("e"))
+    //     {
+    //         controller.zeroMovement = !controller.zeroMovement;
+    //         m_camera.isRotatable = !m_camera.isRotatable;
+    //         questText.text = PrintQuests();
+    //         questText.gameObject.SetActive(!questText.gameObject.activeSelf);
+    //     }
+    // }
 
-    private string PrintQuests()
+    public void PrintQuests()
     {
-        StringBuilder sb = new StringBuilder();
+        if (questPrinted)
+            return;
         foreach (Quest q in quests.Values)
         {
-            sb.Append("(").Append(q.Completed ? "X" : " ").Append(")\t").AppendLine(q.Name);
+            GameObject questButton = (GameObject) Instantiate(questButtonPrefab);
+            questButton.transform.parent = questPanel;
+            questButton.GetComponent<OnQuestSelect>().quest = q;
+            string questText = "(" + (q.Completed ? "X" : " ") + ")\t" + q.Name;
+            questButton.GetComponent<Text>().text = questText;
         }
-        return sb.ToString().TrimEnd();
+        questDescription.text = "";
+        questPrinted = true;
+    }
+
+    public void RemoveQuests()
+    {
+        foreach (Transform child in questPanel)
+        {
+            Destroy(child.gameObject);
+        }
+        questPrinted = false;
+    }
+
+    public void PrintQuestDesc(Quest quest)
+    {
+        questDescription.text = quest.Print();
     }
 
 

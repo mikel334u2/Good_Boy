@@ -45,19 +45,22 @@ public class M_PlayerController : MonoBehaviour
     // Gravity
     public float grav = 9.81f;
     public bool grounded = false;
-    public bool jumping = false; //Maria tEST
+    private bool jumping = false; //Maria tEST
 
-    public bool barking = false; //maria test again numero dos
-    public bool twerking = false; // MARIA TEST AGAIN
-    public bool canJump = true;
+    private bool barking = false; //maria test again numero dos
+    private bool twerking = false; // MARIA TEST AGAIN
+    private bool canJump = true;
     [HideInInspector] public Animator animator; //TEST used to be private
     public float raycastDist = .2f;
     private bool doRaycast = true;
     [HideInInspector]
     public bool zeroMovement = false;
     
-    public bool sprint = false;
+    [HideInInspector] public bool sprint = false;
     public float sprintspeed = 20;
+
+    // bork
+    public AudioSource barkSound;
     
     private void Start() 
     {
@@ -95,6 +98,9 @@ public class M_PlayerController : MonoBehaviour
         }
         animator.SetBool("Sprint", sprint); //TEST does not fully work, as Sprint as no deactivtion
         
+        if(Input.GetKey("b")==true){
+            barkSound.Play();
+        }
         
         if (Input.GetKey("escape"))
         {

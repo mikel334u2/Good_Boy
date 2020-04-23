@@ -33,7 +33,6 @@ public class DialogueTrigger : MonoBehaviour
     private float nextTime = 0f; // used with waitTime to create a timer system
     private GameObject indicator;
     private DialogueManager dialogueManager;
-    private PlayerInfo player;
     [HideInInspector] public bool isDisabled = false;
     private string[] Separators = {"\'\'"}; // splits the dialogue by 2 single quotes
 
@@ -145,14 +144,10 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (!isDisabled && other.gameObject.tag == "Player")
         {
-            if (player == null)
-            {
-                other.gameObject.TryGetComponent<PlayerInfo>(out player);
-            }
             if (gameObject.tag == "NPC")
             {
                 // If the other character is an NPC, add it as a friend
-                player.AddFriend(gameObject.name);
+                PlayerInfo.Player.AddFriend(gameObject.name);
             }
 
             if (!TriggerWithButton) // If dialogue triggered on collision
