@@ -35,6 +35,7 @@ public class M_PlayerController : MonoBehaviour
     Vector3 velocityXZ;
     public float speed = 10f;
     public float jumpVelocity = 10;
+    public float bounceVelocity = 50;
     public float acceleration = 11;
     float turnSpeed = 5f;
     public float turnSpeedLow = 7f;
@@ -87,7 +88,7 @@ public class M_PlayerController : MonoBehaviour
         //DoAttack();
 
         HandleMovement();
-        // Debug.Log(velocity);
+        Debug.Log(velocity);
         
         if (Input.GetButtonDown("Sprint") && sprint == false){
         	sprint = true;
@@ -296,9 +297,10 @@ public class M_PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider collision) 
     {
     	if (collision.tag == "Bounce"){
-    		Debug.Log("Bounce");
-    		velocity.y = -velocity.y;
     		
+    		velocity.y = bounceVelocity;
+            Debug.Log("Bounce " + velocity.y);
+    		doRaycast = false;
     	}
     	 
     }

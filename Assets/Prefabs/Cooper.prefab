@@ -567,7 +567,7 @@ MonoBehaviour:
   zeroMovement: 0
   sprint: 0
   sprintspeed: 20
-  barkSound: {fileID: 0}
+  barkSound: {fileID: 67329334}
 --- !u!114 &273436518606563921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,6 +580,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9c8179f0f1adc47aa33962831fcf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questButtonPrefab: {fileID: 4259351036206285120, guid: 4c10dc271c6b625488606271672f51f5,
+    type: 3}
+  questPanel: {fileID: 0}
+  questDescription: {fileID: 0}
+  nameOfCoinQuest: Shiny Things
+  scoreText: {fileID: 0}
+  coinCount: 0
+  questPrinted: 0
   friends: []
 --- !u!114 &273436518606563934
 MonoBehaviour:

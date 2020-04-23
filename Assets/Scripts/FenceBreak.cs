@@ -6,8 +6,6 @@ using UnityEngine;
 public class FenceBreak : MonoBehaviour
 {
     private M_PlayerController playerController;
-
-    private bool collided = false;
     private Vector3 velocity = new Vector3(0,0,0);
 
     // Start is called before the first frame update
@@ -19,15 +17,22 @@ public class FenceBreak : MonoBehaviour
     void Update()
     {
         // Debug.Log(velocity);
-        transform.Translate(velocity * Time.deltaTime);
+        transform.Translate(velocity * Time.deltaTime, Space.World);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && playerController.sprint)
         {
-            GetComponent<Collider>().enabled = false;
+            foreach (Collider c in GetComponents<Collider>())
+            {
+                c.enabled = false;
+            }
             velocity = playerController.velocity;
+            Debug.Log("Player controller velocity: " + playerController.velocity);
+            if (velocity.y <= 0)
+                velocity.y = -velocity.y;
+            Destroy(gameObject, 15f);
         }
     }
 }
