@@ -7,6 +7,4 @@ You can use WASD to move and the mouse to aim your view. Press E to open up your
 Check the controls page in the notebook for some extra stuff too!
 ''
 Above all... don't forget to have fun and explore!
-
-
-
+[DESTROY]

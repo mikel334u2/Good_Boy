@@ -25,3 +25,4 @@ Don't worry, I'll be your tour guide! The woods are lovely this time of year.
 Because I’m feeling... generous, I’ll give you a hint, pup. It looks like a section of this fence here is loose.
 ''
 [QUEST=Breaking Out][DESC=Get past the fence somehow.][GOAL=FenceGoal]
+[DESTROY]

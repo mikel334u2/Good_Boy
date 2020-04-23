@@ -4,5 +4,4 @@
 ''
 Come along this path and I'll show you around.
 ''
-[QUEST=Welcome to the Wood][DESC=Explore!][GOAL=EndGoal]
-
+[QUEST=Welcome to the Wood][DESC=Explore!][GOAL=EndGoal][DESTROY]
