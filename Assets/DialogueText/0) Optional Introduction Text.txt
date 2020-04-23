@@ -1,0 +1,12 @@
+[NAME=???][IMG=Dialogue/bee]Hi there, and welcome to Good Boy!
+''
+[NAME=Beeatrice][IMG=Dialogue/bee]The name's Beeatrice and I'm here to give you a quick rundown of the controls before you head out.
+''
+You can use WASD to move and the mouse to aim your view. Press E to open up your notebook and see what the world has to offer!
+''
+Check the controls page in the notebook for some extra stuff too!
+''
+Above all... don't forget to have fun and explore!
+
+
+

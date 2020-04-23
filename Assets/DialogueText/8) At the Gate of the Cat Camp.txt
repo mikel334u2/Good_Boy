@@ -1,0 +1,21 @@
+[NAME=???][IMG=Dialogue/guard]Who goes there? 
+''
+Begone, dog!
+''
+[NAME=Chess][IMG=Dialogue/chess]Be calm, guard, he's with me. Introduce yourself, pup.
+''
+[NAME=Cooper][IMG=Dialogue/cooper_grin]I'm Cooper the Corgi!
+''
+[NAME=Guard][IMG=Dialogue/guard]Hm, so you bring a visitor, Chess? Well, you are always welcome, but the dog must prove himself.
+''
+[NAME=Cooper][IMG=Dialogue/cooper]What do you need me to do? I’m a very Good Boy, I can do it!
+''
+[NAME=Guard][IMG=Dialogue/guard]Hmph! So you say.
+''
+In order to gain entrance, you must fulfill this task: There are three keys to this entrance, and you must collect them if you would like to enter. 
+''
+One requires bravery over the floods, one glitters above our heads, and one lies in the glade beyond. 
+''
+[NAME=Cooper][IMG=Dialogue/cooper_grin]Okay, got it! You can count on me!
+''
+[QUEST=The Keys to Success][DESC=Collect all three keys.][COLLECT=Key,3]

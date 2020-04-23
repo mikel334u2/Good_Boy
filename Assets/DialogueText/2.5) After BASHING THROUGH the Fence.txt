@@ -1,0 +1,8 @@
+[NAME=Chess][IMG=Dialogue/chess_smile]Goodness!
+''
+[NAME=Chess][IMG=Dialogue/chess_smirk]Well, I can't say I was expecting that. Welcome to the forest, pup. 
+''
+Come along this path and I'll show you around.
+''
+[QUEST=Welcome to the Wood][DESC=Explore!][GOAL=EndGoal]
+

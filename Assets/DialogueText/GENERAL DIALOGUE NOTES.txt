@@ -1,0 +1,46 @@
+GENERAL DIALOGUE NOTES
+
+1) Chess' hint at the end depends on using the weak point of the fence, breaking it somehow.
+It may need to change depending on how Cooper gets past it.
+	GOAL QUEST [GOAL=FenceGoal] (goal should be beyond the fence)
+
+2) The quest that is triggered here is a game-wide quest that is only completed at the very end of the game
+The Player shouldn't be able to see it disappear after receiving it
+	GOAL QUEST [GOAL=EndGoal] (goal should be inaccessible, so it never goes away)
+
+3) This dialogue establishes that Cooper will respwan back at the shore should he fall in.
+	GOAL QUEST [GOAL=RiverGoal] (goal should be placed at the other end of the river)
+
+4) *This dialogue can be optional, but enhances gameplay with positive feedback and worldbuilding.
+
+5) Another obstacle dialogue with a quest.
+	GOAL QUEST [GOAL=MazeGoal] (goal should be placed at the end of the maze)
+
+6) *This dialogue can be optional, but rewards the player for reaching the top with more than just the key
+
+7) This dialogue introduces the Cat Camp as the new goal besides exploration.
+	GOAL QUEST [GOAL=CampGoal] (goal should be placed just within the entrance to the camp, inaccessible until the Player actually enters (after collecting the keys))
+
+8) This dialogue introduces the keys that need to be collected. The guard cat should be within the camp, not visible from the outside.
+The dialogue marker for the guard should just be in the center of the gate, just in front of it.
+The cat guard should either have an image of a blue question mark or a new cat.
+	COLLECT QUEST [Tag:Key][3]
+
+8.5) *This dialogue can be optional, but is used in the case that the Player returns to the gate without all three keys.
+
+9) This dialogue introduces the Squirrel character and the payoff for collecting coins (they have no explanation or worth otherwise)
+The squirrel can either just be Squirrel, or have a name. If we give him a name, this dialogue needs to change to introduce him accordingly
+The number of coins can also be subject to change. It should be an amount that you have to actively explore to get, not just what you come across.
+	COLLECT QUEST [Tag:Coin][50]
+
+9.5) *This dialogue can be optional, but is used in the case that the Player returns to the squirrel without all the coins.
+
+10) Dialogue when you complete the coin quest and return to the squirrel.
+Necessary so you know the coins were exchanged for the key
+NEED TO SUBTRACT THE AMOUNT OF COINS FROM THE PLAYER'S TOTAL ACCORDINGLY
+
+11) Dialogue when you complete the key quest and return to the Cat Camp
+Necessary so you know the CampGoal has been completed
+
+12) FINAL DIALOGUE
+MAY BE CHANGED; this dialogue sets the tone for what the future game would look like.

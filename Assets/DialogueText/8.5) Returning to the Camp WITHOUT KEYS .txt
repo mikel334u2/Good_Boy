@@ -1,0 +1,5 @@
+[NAME=Guard][IMG=Dialogue/guard]You do not have the keys. Must I repeat the clues?
+''
+One requires bravery over the floods, one glitters above our heads, and one lies in the glade beyond. 
+''
+[NAME=Cooper][IMG=Dialogue/cooper_grin]Thanks, got it! You can count on me!
