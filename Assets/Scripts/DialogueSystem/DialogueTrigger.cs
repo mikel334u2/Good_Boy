@@ -16,13 +16,13 @@ using System.Text;
  * 
  * Text file example is found in SampleDialogue.txt
  * Special characters: left bracket [ , right bracket ] , 2 single-quotes ''
- * Tags: NAME, IMG, QUEST, DESC, COLLECT, GOAL, DESTROY, BREAK, END, CLEAR
+ * Tags: NAME, IMG, QUEST, DESC, COLLECT, GOAL, DESTROY, BREAK, END, CLEAR, CALL
  */
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public TextAsset textFileAsset;
-    // public List<TextAsset> textFileAssets; // your imported text file for your NPC
+    // public TextAsset textFileAsset;
+    public List<TextAsset> textFileAssets; // your imported text file for your NPC
     public bool TriggerWithButton = false;
     public GameObject optionalButtonIndicator;
     public Vector3 optionalIndicatorOffset = new Vector3(0, 0, 0);
@@ -51,7 +51,8 @@ public class DialogueTrigger : MonoBehaviour
     private void ReadTextFile()
     {
         // Retrieve text, then split dialogue lines by 2 single quotes, removing empty strings
-        // TextAsset textFileAsset = CheckAndLoadText();
+        TextAsset textFileAsset = DialogueEvents.Manager.CheckAndLoadText(textFileAssets);
+        // Debug.Log("Text Asset Name: " + textFileAsset.name);
         string txt = textFileAsset.text;
         string[] lines = txt.Split(Separators, System.StringSplitOptions.RemoveEmptyEntries);
 
@@ -69,6 +70,7 @@ public class DialogueTrigger : MonoBehaviour
                         break; // If tag found, queue it and break
                 }
             }
+            SearchAndQueueTag(sb, "CALL"); // adds [CALL=Cart Animation]
 
             QueueActualDialogue(sb.ToString());  // Queue the actual dialogue
             SearchAndQueueTag(sb, "CLEAR");
@@ -78,20 +80,6 @@ public class DialogueTrigger : MonoBehaviour
             dialogue.Enqueue("[BREAK=]"); // breaks up the lines
         }
     }
-
-    // Loads text based on conditions
-    // private TextAsset CheckAndLoadText()
-    // {
-        // if (gameObject.name.Equals("Cat Lite") && player.quests.ContainsKey("Breaking Out"))
-        // {
-        //     if (!player.quests["Breaking Out"].Completed)
-        //     {
-        //         return textFileAssets[2];
-        //     }
-        //     return textFileAssets[1];
-        // }
-        // return textFileAssets[0];
-    // }
 
     /*
      * Searches for a tag in the line.

@@ -3,5 +3,6 @@
 [NAME=Guard][IMG=Dialogue/guard]Indeed he has. 
 ''
 You've passed the trials, Cooper the Corgi. Welcome to the Cat Camp!
-
-
+''
+[CALL=Cart Animation]
+[DESTROY]

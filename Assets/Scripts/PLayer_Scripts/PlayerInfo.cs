@@ -18,6 +18,20 @@ public class PlayerInfo : MonoBehaviour
     public Text scoreText;
     [HideInInspector] public int coinCount = 0;
 
+    // KEY QUEST
+    public string nameOfKeyQuest = "The Keys to Success";
+    public GameObject[] keys;
+    public GameObject[] keyImages;
+    public Dictionary<GameObject, GameObject> keyMap;
+    [HideInInspector] public int keyCount = 0;
+
+    // STICKERS/MOTHS
+    public GameObject[] stickers;
+    public GameObject[] stickerImages;
+    public Text stickerText;
+    public Dictionary<GameObject, GameObject> stickerMap;
+    [HideInInspector] public int stickerCount = 0;
+
     [HideInInspector] public bool questPrinted = false;
     [HideInInspector] public List<string> friends;
     //public float currentHealth = 3;
@@ -60,7 +74,16 @@ public class PlayerInfo : MonoBehaviour
         // questText.gameObject.SetActive(false);
         transform.position = respawn.transform.position;
 
-        // [TODO] INITIALIZE UI TO FALSE
+        keyMap = new Dictionary<GameObject, GameObject>();
+        for (int i = 0; i < keyImages.Length; i++)
+        {
+            keyMap.Add(keys[i], keyImages[i]);
+        }
+        stickerMap = new Dictionary<GameObject, GameObject>();
+        for (int i = 0; i < stickerImages.Length; i++)
+        {
+            stickerMap.Add(stickers[i], stickerImages[i]);
+        }
     }
 
     // private void Update()

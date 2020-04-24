@@ -1,5 +1,4 @@
 [NAME=Chess][IMG=Dialogue/chess_smirk]Good work. You certainly lack the feline aversion to water.
 ''
 [NAME=Chess][IMG=Dialogue/chess_smile]Though fast, that river is wonderful for fishing in the fall. Now we can continue with the tour. 
-
-
+[DESTROY]

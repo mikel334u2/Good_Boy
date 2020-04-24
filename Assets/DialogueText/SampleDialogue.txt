@@ -37,6 +37,9 @@ The GOAL tag takes 1 parameter: the name of the trigger collider that the player
 [GOAL=FenceGoal]
 This dialogue creates a quest to go to the fence. The name of the trigger collider object to reach is "FenceGoal".
 ''
+[CALL=Cart Animation]
+You can even call functions in dialogue, as long as you configure them in the DialogueEvents script.
+''
 Other cool tags include:
 CLEAR - creates a blank piece of dialogue
 DESTROY - deactivates a dialogue trigger forever, add this at the end

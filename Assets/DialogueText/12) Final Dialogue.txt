@@ -27,4 +27,5 @@ Please Cooper… will you help us find them?
 I’ve… never worked with cats before...
 ''
 [NAME=Cooper][IMG=Dialogue/cooper_grin]But I’ve never turned down a friend in need! I’m a Good Boy, so I’ll help you however I can!
-
+''
+[CALL=Load Credits][DESTROY]

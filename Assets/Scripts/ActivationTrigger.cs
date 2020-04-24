@@ -5,33 +5,17 @@ using UnityEngine.Events;
 
 public class ActivationTrigger : MonoBehaviour
 {
-    [SerializeField] private Animation cart;
-    private bool hasTriggered;
-
-    void Start()
-    {
-        hasTriggered = false;
-    }
+    [SerializeField] private UnityEvent actions;
+    [SerializeField] private bool isPermanent = true;
+    private bool hasTriggered = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !hasTriggered)
         {
-            if (!hasTriggered && CheckKeys())
-            {
-                cart.Play();
+            actions.Invoke();
+            if (isPermanent)
                 hasTriggered = true;
-            }
         }
-    }
-
-    private bool CheckKeys()
-    {
-        Quest quest = null;
-        if (PlayerInfo.Player.quests.ContainsKey("The Keys to Success"))
-        {
-            quest = PlayerInfo.Player.quests["The Keys to Success"];
-        }
-        return quest != null && quest.Completed;
     }
 }

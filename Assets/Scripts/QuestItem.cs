@@ -8,6 +8,7 @@ public class QuestItem : MonoBehaviour
     private PlayerInfo player;
 
     private bool hasReceivedCoinQuest = false;
+    private bool hasReceivedKeyQuest = false;
 
     private void Start()
     {
@@ -24,7 +25,10 @@ public class QuestItem : MonoBehaviour
                 quest = player.quests[questName];
             }
 
-            HandleSpecialQuestItem(quest);
+            // Special cases because of UI/receiving items before start of quest
+            HandleCoins(quest);
+            HandleKeys(quest);
+            HandleStickers();
 
             // Do not check completed quests
             if (quest == null || quest.Completed)
@@ -50,9 +54,8 @@ public class QuestItem : MonoBehaviour
         }
     }
 
-    private void HandleSpecialQuestItem(Quest quest)
+    private void HandleCoins(Quest quest)
     {
-        // for the coin quest
         if (questName.Equals(player.nameOfCoinQuest))
         {
             player.coinCount++;
@@ -62,6 +65,36 @@ public class QuestItem : MonoBehaviour
                 quest.CurrentItems = player.coinCount - 1;
                 hasReceivedCoinQuest = true;
             }
+            Destroy(gameObject);
+        }
+    }
+
+    private void HandleKeys(Quest quest)
+    {
+        if (questName.Equals(player.nameOfKeyQuest))
+        {
+            player.keyCount++;
+            if (player.keyMap.ContainsKey(gameObject))
+            {
+                player.keyMap[gameObject].SetActive(true);
+            }
+            if (!hasReceivedKeyQuest && quest != null)
+            {
+                quest.CurrentItems = player.keyCount - 1;
+                hasReceivedKeyQuest = true;
+            }
+            Destroy(gameObject);
+        }
+    }
+
+    private void HandleStickers()
+    {
+        // for stickers (not quests but it still works)
+        if (player.stickerMap.ContainsKey(gameObject))
+        {
+            player.stickerCount++;
+            player.stickerMap[gameObject].SetActive(true);
+            player.stickerText.text = player.stickerCount.ToString();
             Destroy(gameObject);
         }
     }

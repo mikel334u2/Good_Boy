@@ -27,4 +27,4 @@ It's a shame only cats are allowed, it really is quite nice...
 Just keep following the path.
 ''
 [QUEST=A Feline Encampment][DESC=Enter the Cat Camp.][GOAL=CampGoal]
-
+[DESTROY]

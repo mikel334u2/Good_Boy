@@ -468,7 +468,6 @@ GameObject:
   - component: {fileID: 273436518606563920}
   - component: {fileID: 273436518606563932}
   - component: {fileID: 273436518606563921}
-  - component: {fileID: 273436518606563934}
   - component: {fileID: 904288451}
   - component: {fileID: 904288445}
   - component: {fileID: 904288446}
@@ -553,20 +552,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e34bcbacc7a96428bc6b7dd7b1ffec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   speed: 10
+  isSprinting: 0
+  sprintSpeed: 20
   jumpVelocity: 20
+  bounceVelocity: 50
   acceleration: 25
   turnSpeedLow: 7
   turnSpeedHigh: 20
   grav: 60
   grounded: 0
   animator: {fileID: 0}
-  raycastDist: 0.2
+  raycastDistance: 0.2
   zeroMovement: 0
-  sprint: 0
-  sprintspeed: 20
   barkSound: {fileID: 67329334}
 --- !u!114 &273436518606563921
 MonoBehaviour:
@@ -587,26 +586,34 @@ MonoBehaviour:
   nameOfCoinQuest: Shiny Things
   scoreText: {fileID: 0}
   coinCount: 0
+  nameOfKeyQuest: The Keys to Success
+  keys:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  keyImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  keyCount: 0
+  stickers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  stickerImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  stickerText: {fileID: 0}
+  stickerCount: 0
   questPrinted: 0
   friends: []
---- !u!114 &273436518606563934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273436518606563933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0e141845b9bb3e4d83b0d22ef9021a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key3: {fileID: 0}
-  key2: {fileID: 0}
-  key1: {fileID: 0}
-  sticker3: {fileID: 0}
-  sticker2: {fileID: 0}
-  sticker1: {fileID: 0}
 --- !u!65 &904288451
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 public class FenceBreak : MonoBehaviour
 {
     private M_PlayerController playerController;
-    private Vector3 velocity = new Vector3(0,0,0);
+    [HideInInspector] public Vector3 velocity = new Vector3(0,0,0);
 
     // Start is called before the first frame update
     void Start()
