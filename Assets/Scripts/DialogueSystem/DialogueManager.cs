@@ -85,6 +85,7 @@ public class DialogueManager : MonoBehaviour
                 case "IMG":     // Set the image of character speaking
                     // Real path: Assets/Resources/...
                     ImageBox.sprite = Resources.Load<Sprite>(DequeueNextTag());
+                    Debug.Log(ImageBox.sprite != null);
                     ImageBox.gameObject.SetActive(ImageBox.sprite != null);
                     break;
                 case "QUEST":   // this must be the first tag of the "quest" tags
