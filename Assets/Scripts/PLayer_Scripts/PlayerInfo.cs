@@ -84,6 +84,9 @@ public class PlayerInfo : MonoBehaviour
         {
             stickerMap.Add(stickers[i], stickerImages[i]);
         }
+
+        // TAKE THESE OUT
+        // coinCount = 49;
     }
 
     // private void Update()
@@ -127,6 +130,24 @@ public class PlayerInfo : MonoBehaviour
         questDescription.text = quest.Print();
     }
 
+    public void CheckQuestCompleted(Quest quest)
+    {
+        switch (quest.Type)
+        {
+            case QuestType.Collect:
+                if (quest.CurrentItems >= quest.RequiredItems)
+                {
+                    quest.Completed = true;
+                    // [TODO] Display some congratulations message for collecting all items
+                }
+                break;
+            case QuestType.Goal:
+                quest.Completed = true;
+                Debug.Log("Goal reached.");
+                // [TODO] Display congratulations message for reaching goal
+                break;
+        }
+    }
 
     public void AddFriend(string friendName)
     {

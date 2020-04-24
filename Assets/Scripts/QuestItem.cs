@@ -38,19 +38,13 @@ public class QuestItem : MonoBehaviour
             {
                 case QuestType.Collect:
                     quest.CurrentItems++;
-                    if (quest.CurrentItems >= quest.RequiredItems)
-                    {
-                        quest.Completed = true;
-                        // [TODO] Display some congratulations message for collecting all items
-                    }
                     Destroy(gameObject);
                     break;
                 case QuestType.Goal:
-                    quest.Completed = true;
-                    Debug.Log("Goal reached.");
-                   // [TODO] Display congratulations message for reaching goal
                     break;
             }
+
+            player.CheckQuestCompleted(quest);
         }
     }
 
@@ -60,11 +54,6 @@ public class QuestItem : MonoBehaviour
         {
             player.coinCount++;
             player.scoreText.text = player.coinCount.ToString();
-            if (!hasReceivedCoinQuest && quest != null)
-            {
-                quest.CurrentItems = player.coinCount - 1;
-                hasReceivedCoinQuest = true;
-            }
             Destroy(gameObject);
         }
     }
@@ -77,11 +66,6 @@ public class QuestItem : MonoBehaviour
             if (player.keyMap.ContainsKey(gameObject))
             {
                 player.keyMap[gameObject].SetActive(true);
-            }
-            if (!hasReceivedKeyQuest && quest != null)
-            {
-                quest.CurrentItems = player.keyCount - 1;
-                hasReceivedKeyQuest = true;
             }
             Destroy(gameObject);
         }

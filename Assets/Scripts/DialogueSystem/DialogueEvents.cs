@@ -44,6 +44,20 @@ public class DialogueEvents : MonoBehaviour
         player = PlayerInfo.Player;
     }
 
+    public void OnQuestAdded(Quest quest)
+    {
+        if (quest.Name.Equals(player.nameOfCoinQuest))
+        {
+            quest.CurrentItems = player.coinCount;
+            player.CheckQuestCompleted(quest);
+        }
+        else if (quest.Name.Equals(player.nameOfKeyQuest))
+        {
+            quest.CurrentItems = player.keyCount;
+            player.CheckQuestCompleted(quest);
+        }
+    }
+
     public void HandleEvent(string eventName)
     {
         if (eventName == CART_ANIMATION)

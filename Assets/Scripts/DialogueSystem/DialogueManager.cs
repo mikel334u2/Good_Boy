@@ -91,7 +91,8 @@ public class DialogueManager : MonoBehaviour
                 case "QUEST":   // this must be the first tag of the "quest" tags
                     // If all necessary tags aren't there, this won't work
                     Quest quest = CreateQuest();
-                    Debug.Log(quest.ToString());
+                    // Debug.Log(quest.ToString());
+                    DialogueEvents.Manager.OnQuestAdded(quest);
                     PlayerInfo.Player.quests.Add(quest.Name, quest);
                     break;
                 case "CALL":
