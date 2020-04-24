@@ -22,7 +22,7 @@ public class FenceBreak : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && playerController.sprint)
+        if (other.gameObject.tag == "Player" && playerController.isSprinting)
         {
             foreach (Collider c in GetComponents<Collider>())
             {

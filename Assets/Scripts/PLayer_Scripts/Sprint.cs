@@ -18,7 +18,7 @@ public class Sprint : StateMachineBehaviour
     
     	
     	
-    	sprint = GameObject.Find("Player").GetComponent<M_PlayerController>().sprint;
+    	sprint = GameObject.Find("Player").GetComponent<M_PlayerController>().isSprinting;
     	speed = GameObject.Find("Player").GetComponent<M_PlayerController>().speed = 20;
     	animator = GameObject.Find("Player").GetComponent<M_PlayerController>().animator;
     }

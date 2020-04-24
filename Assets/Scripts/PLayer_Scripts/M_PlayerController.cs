@@ -19,46 +19,41 @@ using UnityEngine;
 public class M_PlayerController : MonoBehaviour
 {
     // Objects
-    CharacterController controller;
-    public Transform cam;
+    private CharacterController controller;
+    private Transform cam;
 
     // Camera
-    Vector3 camF, camR;
+    private Vector3 camF, camR;
 
     // Input
     
-    Vector2 input;
+    private Vector2 input;
 
     // Physics
     Vector3 intent;
-    public Vector3 velocity;
-    Vector3 velocityXZ;
+    [HideInInspector] public Vector3 velocity = new Vector3(0,0,0);
     public float speed = 10f;
+    [HideInInspector] public bool isSprinting = false;
+    public float sprintSpeed = 20;
+    private float adjustedSpeed;
+    
     public float jumpVelocity = 10;
     public float bounceVelocity = 50;
     public float acceleration = 11;
-    float turnSpeed = 5f;
+    private float turnSpeed = 5f;
     public float turnSpeedLow = 7f;
     public float turnSpeedHigh = 20f;
-    Vector3 forward;
-    RaycastHit hit;
+    private Vector3 forward;
+    private RaycastHit hit;
 
     // Gravity
     public float grav = 9.81f;
-    public bool grounded = false;
-    private bool jumping = false; //Maria tEST
-
-    private bool barking = false; //maria test again numero dos
-    private bool twerking = false; // MARIA TEST AGAIN
+    [HideInInspector] public bool grounded = false;
     private bool canJump = true;
     [HideInInspector] public Animator animator; //TEST used to be private
-    public float raycastDist = .2f;
+    public float raycastDistance = .2f;
     private bool doRaycast = true;
-    [HideInInspector]
-    public bool zeroMovement = false;
-    
-    [HideInInspector] public bool sprint = false;
-    public float sprintspeed = 20;
+    [HideInInspector] public bool zeroMovement = false;
 
     // bork
     public AudioSource barkSound;
@@ -71,6 +66,8 @@ public class M_PlayerController : MonoBehaviour
         {
             Debug.Log("Add an Animator to your player");
         }
+        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        adjustedSpeed = speed;
     }
    
     private void Update()
@@ -89,68 +86,43 @@ public class M_PlayerController : MonoBehaviour
 
         HandleMovement();
         // Debug.Log(velocity);
-        
-        if (Input.GetButtonDown("Sprint") && sprint == false){
-        	sprint = true;
-        	speed = sprintspeed;
-        }else if(Input.GetButtonDown("Sprint") && sprint == true){
-        	sprint = false;
-        	speed = 10;
-        }
-        animator.SetBool("Sprint", sprint); //TEST does not fully work, as Sprint as no deactivtion
-        
-        if(Input.GetKey("b")==true){
-            barkSound.Play();
-        }
-        
-        if (Input.GetKey("escape"))
-        {
-            Debug.Log("Game exiting");
-            Application.Quit();
-        }
-        //TEST
-        
     }
 
-    // Stores the input for later use
+    // Handles various inputs
+    // Sets "input" variable
     void DoInput()
     {
+        if (zeroMovement)
+            return;
+        
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1);
 
-        if (zeroMovement)
-            return;
-
-        //test
-        if(Input.GetKeyDown("space")==true){
-            jumping = true;
-            animator.SetBool("Jumping", jumping);        
-        }else{
-            jumping = false;
-            animator.SetBool("Jumping", jumping); 
-        }
-        
-        //twerking test
-        if(Input.GetKey("t") == true){
-            twerking = true;
-            animator.SetBool("Twerking", twerking); 
-        }else{
-            twerking = false;
-            animator.SetBool("Twerking", twerking); 
+        if (Input.GetButtonDown("Sprint"))
+        {
+        	isSprinting = !isSprinting;
+        	adjustedSpeed = (isSprinting) ? sprintSpeed : speed;
         }
 
-        //barking test
-        if(Input.GetKey("b") == true){
-            barking = true;
-            animator.SetBool("Barking", barking); 
-        }else{
-            barking = false;
-            animator.SetBool("Barking", barking); 
+        // animator.SetBool("Sprint", isSprinting); //TEST does not fully work, as Sprint as no deactivtion
+        animator.SetBool("Jumping", Input.GetButtonDown("Jump"));
+        animator.SetBool("Twerking", Input.GetButtonDown("Twerk"));
+        animator.SetBool("Barking", Input.GetButtonDown("Bark"));
+        if (Input.GetButtonDown("Bark"))
+        {
+            barkSound.Play();
+        }
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Debug.Log("Game exiting");
+            Application.Quit();
         }
     }
     
     // sets variables representing the orientation of the camera
     // this way we will move dependent on our camera rotation
+    // sets "camF" and "camR" variables
     void CalculateCamera()
     {
         camF = cam.forward;
@@ -165,32 +137,23 @@ public class M_PlayerController : MonoBehaviour
 
     // lets us know if our character is grounded by performing a raycast
     // from the player to the ground
+    // sets "grounded" and "hit" variables
     void CalculateGround()
     {
-        if(Physics.Raycast(transform.position+Vector3.up*0.1f, -Vector3.up, out hit, raycastDist) && doRaycast)
-        {
-            if (hit.collider.isTrigger == false)
-            {
-                grounded = true;
-                // Debug.Log("Standing on: " + hit.transform.gameObject.name);
-            }
-        }
-        else
-        {       
-            grounded = false;
-        }
+        // if raycast allowed and hit detected and hit is not a trigger collider
+        grounded = doRaycast
+            && Physics.Raycast(transform.position + Vector3.up * 0.1f, -Vector3.up, out hit, raycastDistance)
+            && !hit.collider.isTrigger;
+
+        // Debug.Log("Standing on: " + hit.transform.gameObject.name);
         animator.SetBool("Grounded", grounded); // set animator value of grounded
         // Debug.Log(velocity.y);
     }
 
+    // sets "forward" variable relative to grounded position
     void CalculateForward()
     {
-        if (!grounded)
-        {
-            forward = transform.forward;
-            return;
-        }
-        forward = Vector3.Cross(transform.right, hit.normal);
+        forward = (grounded) ? Vector3.Cross(transform.right, hit.normal) : transform.forward;
     }
     
     // set the velocity for movement with respect to player input and camera orientation
@@ -202,8 +165,7 @@ public class M_PlayerController : MonoBehaviour
         // this is the speed the character will rotate (turn) at
         // we want to base the turn speed based off of how fast we are moving
         // i.e. turn quickly if we are still and slower if we are moving quickly
-        float tS = velocity.magnitude/speed;
-        turnSpeed = Mathf.Lerp(turnSpeedHigh, turnSpeedLow, tS);
+        turnSpeed = Mathf.Lerp(turnSpeedHigh, turnSpeedLow, velocity.magnitude / adjustedSpeed);
         
         // if we are getting movement input
         // turn the character to face the direction of movement
@@ -214,13 +176,13 @@ public class M_PlayerController : MonoBehaviour
         }
         
         // seperate out the y component of velocity so that it does not affect our XZ movement
-        velocityXZ = velocity;
+        Vector3 velocityXZ = velocity;
         velocityXZ.y = 0;
 
         // get the appropriate velocity (which accounts for direction) and apply speed 
         // and Linearly Interpolate based off of rotation (start moving slower and then speed up)
         // then we can add the y velocity back in
-        velocityXZ = Vector3.Lerp(velocityXZ, forward * input.magnitude * speed, acceleration* Time.deltaTime);
+        velocityXZ = Vector3.Lerp(velocityXZ, forward * input.magnitude * adjustedSpeed, acceleration* Time.deltaTime);
         velocity = new Vector3(velocityXZ.x, velocity.y, velocityXZ.z);
     }
 
@@ -231,7 +193,8 @@ public class M_PlayerController : MonoBehaviour
         {
             // animator.SetTrigger("Land");
             velocity.y = -0.5f;
-        } else
+        }
+        else
         {
             velocity.y -= grav * Time.deltaTime;
             if (velocity.y <= 0)
@@ -246,14 +209,11 @@ public class M_PlayerController : MonoBehaviour
     // but only if the character is grounded
     void DoJump()
     {
-        if (grounded)
+        if (grounded && Input.GetButtonDown("Jump"))
         {
-            if (Input.GetButtonDown("Jump"))
-            {
-                doRaycast = false;
-                velocity.y = jumpVelocity;
-                // animator.SetTrigger("Jump");
-            }
+            doRaycast = false;
+            velocity.y = jumpVelocity;
+            // animator.SetTrigger("Jump");
         }
     }
     /*void DoAttack()
@@ -273,11 +233,11 @@ public class M_PlayerController : MonoBehaviour
         animator.SetFloat("MoveSpeed", timedVelocity.magnitude * 10);
     }
 
-    public void StopMovement()
-    {
-        animator.SetFloat("MoveSpeed", 0);
-        this.enabled = false;
-    }
+    // public void StopMovement()
+    // {
+    //     animator.SetFloat("MoveSpeed", 0);
+    //     this.enabled = false;
+    // }
     void zeroVelocityXZ()
     {
         if(zeroMovement)
