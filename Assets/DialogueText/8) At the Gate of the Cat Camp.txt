@@ -12,7 +12,9 @@ Begone, dog!
 ''
 [NAME=Guard][IMG=Dialogue/guard]Hmph! So you say.
 ''
-In order to gain entrance, you must fulfill this task: There are three keys to this entrance, and you must collect them if you would like to enter. 
+In order to gain entrance, you must fulfill this task...
+''
+There are three keys to this entrance, and you must collect them if you would like to enter. 
 ''
 One requires bravery over the floods, one glitters above our heads, and one lies in the glade beyond. 
 ''
