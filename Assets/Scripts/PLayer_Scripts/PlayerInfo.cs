@@ -89,26 +89,17 @@ public class PlayerInfo : MonoBehaviour
         // coinCount = 49;
     }
 
-    // private void Update()
-    // {
-    //     if (Input.GetButtonDown("e"))
-    //     {
-    //         controller.zeroMovement = !controller.zeroMovement;
-    //         m_camera.isRotatable = !m_camera.isRotatable;
-    //         questText.text = PrintQuests();
-    //         questText.gameObject.SetActive(!questText.gameObject.activeSelf);
-    //     }
-    // }
-
-    public void PrintQuests()
+    public void PrintQuests(Button questTab)
     {
         if (questPrinted)
             return;
         foreach (Quest q in quests.Values)
         {
             GameObject questButton = (GameObject) Instantiate(questButtonPrefab);
-            questButton.transform.parent = questPanel;
-            questButton.GetComponent<OnQuestSelect>().quest = q;
+            questButton.transform.SetParent(questPanel, false);
+            OnQuestSelect questInfo = questButton.GetComponent<OnQuestSelect>();
+            questInfo.quest = q;
+            questInfo.questButton = questTab;
             string questText = "(" + (q.Completed ? "X" : " ") + ")\t" + q.Name;
             questButton.GetComponent<Text>().text = questText;
         }
@@ -137,13 +128,14 @@ public class PlayerInfo : MonoBehaviour
             case QuestType.Collect:
                 if (quest.CurrentItems >= quest.RequiredItems)
                 {
+                    quest.CurrentItems = quest.RequiredItems;
                     quest.Completed = true;
                     // [TODO] Display some congratulations message for collecting all items
                 }
                 break;
             case QuestType.Goal:
                 quest.Completed = true;
-                Debug.Log("Goal reached.");
+                // Debug.Log("Goal reached.");
                 // [TODO] Display congratulations message for reaching goal
                 break;
         }

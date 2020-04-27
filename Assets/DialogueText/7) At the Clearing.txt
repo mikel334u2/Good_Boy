@@ -22,7 +22,8 @@ It's a shame only cats are allowed, it really is quite nice...
 ''
 [NAME=Cooper][IMG=Dialogue/cooper_grin]I'll be on my best behavior! Promise! Please, Chess?
 ''
-[NAME=Chess][IMG=Dialogue/chess_smirk]...oh alright, pup. You've certainly convinced me. I'll lead you there, but you'll have to convince the Camp as well.
+[NAME=Chess][IMG=Dialogue/chess_smirk]
+...oh alright, pup. You've certainly convinced me. I'll lead you there, but you'll have to convince the Camp as well.
 ''
 Just keep following the path.
 ''

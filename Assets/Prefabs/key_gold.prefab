@@ -4865,6 +4865,7 @@ MonoBehaviour:
   x: 2
   y: 0
   z: 0
+  isWorldSpace: 0
 --- !u!114 &3526013986160300631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4878,8 +4879,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: 0
-  y: 2
+  y: 20
   z: 0
+  isWorldSpace: 1
+--- !u!114 &1990657283639659403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8034635598045915877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3928970ffeef8174fa21b21a8af16cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.05
+  frequency: 0.8
 --- !u!1001 &2062982433106785260
 PrefabInstance:
   m_ObjectHideFlags: 0

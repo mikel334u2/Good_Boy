@@ -1,10 +1,18 @@
-[NAME=???][IMG=Dialogue/bee]Hi there, and welcome to Good Boy!
+[NAME=???][IMG=Dialogue/bee]
+Buzz buzz! Hope you're not buzzy! *heheh*
 ''
-[NAME=Beeatrice][IMG=Dialogue/bee]The name's Beeatrice and I'm here to give you a quick rundown of the controls before you head out.
+[NAME=Beeatrice][IMG=Dialogue/bee]
+Welcome to Good Boy! The name's Beeatrice and I'm here to give you the buzz about the controls!
 ''
-You can use WASD to move and the mouse to aim your view. Press E to open up your notebook and see what the world has to offer!
+You can use WASD (not WASP!) to move and the mouse to aim your view.
 ''
-Check the controls page in the notebook for some extra stuff too!
+Press E to open up your notebook and see what the beeautiful world has to offer!
 ''
-Above all... don't forget to have fun and explore!
+I beelieve the controls page in the notebook has some extra stuff too!
+''
+We also support gamepads! Buzz you'll have to figure that stuff out on your own...
+''
+This dialogue's already too long and I have places to BEE!
+''
+Above all... don't forget to have fun and explore! I beeseech you!
 [DESTROY]

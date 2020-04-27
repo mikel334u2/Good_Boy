@@ -19,9 +19,9 @@ public class DialogueEvents : MonoBehaviour
     }
 
     [Header("Element 0 for Switching Dialogue")]
-    [SerializeField] private string PASSING_FENCE = "2) After Passing the Fence";
-    [SerializeField] private string CAT_CAMP_GUARD = "8) At the Gate of the Cat Camp";
-    [SerializeField] private string SQUIRREL = "9) Meeting the Squirrel";
+    [SerializeField] private TextAsset PASSING_FENCE;
+    [SerializeField] private TextAsset CAT_CAMP_GUARD;
+    [SerializeField] private TextAsset SQUIRREL;
 
     [Header("Event Names")]
     [SerializeField] private string CART_ANIMATION = "Cart Animation";
@@ -33,8 +33,8 @@ public class DialogueEvents : MonoBehaviour
     [SerializeField] private string CREDITS_SCENE = "Good_Boy_Updated";
 
     [Header("Required Assets")]
-    [SerializeField] private Animation cartAnimation;
-    [SerializeField] private Animation floatKeyDownAnimation;
+    [SerializeField] private Animator cart;
+    [SerializeField] private Animator key;
     [SerializeField] private FenceBreak fence;
     private PlayerInfo player;
 
@@ -61,14 +61,18 @@ public class DialogueEvents : MonoBehaviour
     public void HandleEvent(string eventName)
     {
         if (eventName == CART_ANIMATION)
-            cartAnimation.Play();
+        {
+            cart.SetTrigger(CART_ANIMATION);
+        }
         else if (eventName == DEDUCT_COINS)
         {
             player.coinCount -= 50;
             player.scoreText.text = player.coinCount.ToString();
         }
         else if (eventName == FLOAT_KEY_DOWN)
-            floatKeyDownAnimation.Play();
+        {
+            key.SetTrigger(FLOAT_KEY_DOWN);
+        }
         else if (eventName == LOAD_CREDITS)
             SceneManager.LoadScene(CREDITS_SCENE);
     }
@@ -81,17 +85,17 @@ public class DialogueEvents : MonoBehaviour
 
         string textAsset0 = textFileAssets[0].name;
 
-        if (textAsset0 == PASSING_FENCE && (fence == null || fence.velocity.magnitude != 0))
+        if (textAsset0 == PASSING_FENCE.name && (fence == null || fence.velocity.magnitude != 0))
             return textFileAssets[1];
 
-        else if (textAsset0 == CAT_CAMP_GUARD && player.quests.ContainsKey(player.nameOfKeyQuest))
+        else if (textAsset0 == CAT_CAMP_GUARD.name && player.quests.ContainsKey(player.nameOfKeyQuest))
         {
             if (player.quests[player.nameOfKeyQuest].Completed)
                 return textFileAssets[2];
             return textFileAssets[1];
         }
 
-        else if (textAsset0 == SQUIRREL && player.quests.ContainsKey(player.nameOfCoinQuest))
+        else if (textAsset0 == SQUIRREL.name && player.quests.ContainsKey(player.nameOfCoinQuest))
         {
             if (player.quests[player.nameOfCoinQuest].Completed)
                 return textFileAssets[2];

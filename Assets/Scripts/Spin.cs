@@ -9,18 +9,17 @@ public class Spin : MonoBehaviour
 	[SerializeField] float x = 0;
 	[SerializeField] float y = 0;
 	[SerializeField] float z = 0;
-	
-	
-	
-    // Start is called before the first frame update
+    [SerializeField] bool isWorldSpace = false;
+    private Vector3 rotation;
+
     void Start()
     {
-        
+        rotation = new Vector3(x,y,z);
     }
 
     // Update is called once per frame
     void Update()
     {
-    	gameObject.transform.Rotate(z,x,y);
+    	gameObject.transform.Rotate(rotation * Time.deltaTime, isWorldSpace ? Space.World : Space.Self);
     }
 }

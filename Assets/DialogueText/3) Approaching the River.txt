@@ -10,5 +10,7 @@ You’d be able to get back to shore should you fall in, but you’d be swept aw
 ''
 [NAME=Chess][IMG=Dialogue/chess_smirk]That said... good luck traversing the rapids, pup. 
 ''
+P.S. You might wanna try a running start before the big jumps.
+''
 [QUEST=River Rapids][DESC=Cross the river.][GOAL=RiverGoal]
 [DESTROY]

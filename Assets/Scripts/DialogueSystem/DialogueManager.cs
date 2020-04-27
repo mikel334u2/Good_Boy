@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour
             pController.zeroMovement = true; // disable player controller
         }
         CanvasBox.SetActive(true); // open the dialogue box
+        destroyTrigger = false;
         ImageBox.sprite = null;
         inputStream = dialogue; // store the dialogue from dialogue trigger
         AdvanceDialogue(); // Prints out the first line of dialogue

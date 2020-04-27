@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using System.Text.RegularExpressions;
 using System.Text;
+using UnityEngine.InputSystem;
 
 /********************
  * DIALOGUE TRIGGER *
@@ -26,16 +27,33 @@ public class DialogueTrigger : MonoBehaviour
     public bool TriggerWithButton = false;
     public GameObject optionalButtonIndicator;
     public Vector3 optionalIndicatorOffset = new Vector3(0, 0, 0);
-    public string button = "Jump";
 
     private bool dialogueTriggered = false;
     private Queue<string> dialogue = new Queue<string>(); // stores the dialogue (Great Performance!)
-    private float waitTime = 0.5f; // lag time for advancing dialogue so you can actually read it
+    public float waitTime = 0.2f; // lag time for advancing dialogue so you can actually read it
     private float nextTime = 0f; // used with waitTime to create a timer system
     private GameObject indicator;
     private DialogueManager dialogueManager;
     [HideInInspector] public bool isDisabled = false;
     private string[] Separators = {"\'\'"}; // splits the dialogue by 2 single quotes
+
+    // New input system
+    private bool buttonPressed = false;
+    private Controls controls;
+    private void Awake()
+    {
+        controls = new Controls();
+        controls.Player.Interact.performed += _ => buttonPressed = true;
+        controls.Player.Interact.canceled += _ => buttonPressed = false;
+    }
+    private void OnEnable()
+    {
+        controls.Player.Interact.Enable();
+    }
+    private void OnDisable()
+    {
+        controls.Player.Interact.Disable();
+    }
 
     private void Start()
     {
@@ -141,6 +159,7 @@ public class DialogueTrigger : MonoBehaviour
 
             if (!TriggerWithButton) // If dialogue triggered on collision
             {
+                // Debug.Log("Starting dialogue");
                 ReadTextFile();
                 dialogueManager.StartDialogue(dialogue, this);
                 nextTime = Time.timeSinceLevelLoad + waitTime;
@@ -155,9 +174,11 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // If player pressed button while colliding with other, then show dialogue
-        if (!isDisabled && other.gameObject.tag == "Player" && Input.GetButton(button) && nextTime < Time.timeSinceLevelLoad)
+        if (!isDisabled && other.gameObject.tag == "Player"
+            && !UIActions.UI.paused && buttonPressed && nextTime < Time.timeSinceLevelLoad)
         {
             nextTime = Time.timeSinceLevelLoad + waitTime; // reset waiting period before advancing dialogue
+            buttonPressed = false;
             if (dialogueTriggered) // if dialogue triggered already, advance dialogue
             {
                 dialogueManager.AdvanceDialogue();

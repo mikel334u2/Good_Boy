@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /**************************************************************************************************
  *                                                                                                *
@@ -24,10 +25,7 @@ public class M_PlayerController : MonoBehaviour
 
     // Camera
     private Vector3 camF, camR;
-
-    // Input
-    
-    private Vector2 input;
+    [HideInInspector] public Vector3 camAngles;
 
     // Physics
     Vector3 intent;
@@ -57,6 +55,35 @@ public class M_PlayerController : MonoBehaviour
 
     // bork
     public AudioSource barkSound;
+
+    // New input system
+    private Controls controls;
+    private Vector2 input = new Vector2(0,0);
+    private bool jumpInput = false;
+    private bool barkInput = false;
+    private bool twerkInput = false;
+    private void Awake()
+    {
+        controls = new Controls();
+        controls.Player.Move.performed += ctx => input = ctx.ReadValue<Vector2>();
+        controls.Player.Bark.performed += ctx => barkInput = true;
+        controls.Player.Jump.performed += ctx => jumpInput = true;
+        controls.Player.Sprint.performed += ctx => isSprinting = true;
+        controls.Player.Twerk.performed += ctx => twerkInput = true;
+        controls.Player.Move.canceled += ctx => input = Vector2.zero;
+        controls.Player.Bark.canceled += ctx => barkInput = false;
+        controls.Player.Jump.canceled += ctx => jumpInput = false;
+        controls.Player.Sprint.canceled += ctx => isSprinting = false;
+        controls.Player.Twerk.canceled += ctx => twerkInput = false;
+    }
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
     
     private void Start() 
     {
@@ -72,16 +99,14 @@ public class M_PlayerController : MonoBehaviour
    
     private void Update()
     {
-        DoInput();
+        if (!zeroMovement)
+            DoInput();
         CalculateCamera();
         CalculateGround();
         CalculateForward();
         DoMove();
         DoGravity();
-        if (canJump)
-        {
-            DoJump();
-        }
+        DoJump();
         //DoAttack();
 
         HandleMovement();
@@ -92,31 +117,15 @@ public class M_PlayerController : MonoBehaviour
     // Sets "input" variable
     void DoInput()
     {
-        if (zeroMovement)
-            return;
-        
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        input = Vector2.ClampMagnitude(input, 1);
-
-        if (Input.GetButtonDown("Sprint"))
-        {
-        	isSprinting = !isSprinting;
-        	adjustedSpeed = (isSprinting) ? sprintSpeed : speed;
-        }
+        adjustedSpeed = (isSprinting) ? sprintSpeed : speed;
 
         // animator.SetBool("Sprint", isSprinting); //TEST does not fully work, as Sprint as no deactivtion
-        animator.SetBool("Jumping", Input.GetButtonDown("Jump"));
-        animator.SetBool("Twerking", Input.GetButtonDown("Twerk"));
-        animator.SetBool("Barking", Input.GetButtonDown("Bark"));
-        if (Input.GetButtonDown("Bark"))
+        animator.SetBool("Jumping", jumpInput);
+        animator.SetBool("Twerking", twerkInput);
+        animator.SetBool("Barking", barkInput);
+        if (barkInput)
         {
             barkSound.Play();
-        }
-
-        if (Input.GetButtonDown("Cancel"))
-        {
-            Debug.Log("Game exiting");
-            Application.Quit();
         }
     }
     
@@ -159,6 +168,8 @@ public class M_PlayerController : MonoBehaviour
     // set the velocity for movement with respect to player input and camera orientation
     void DoMove()
     {
+        input = Vector2.ClampMagnitude(input, 1);
+
         // this is the direction that we will move in based on input and camera orientation
         intent = (camF * input.y + camR * input.x);
 
@@ -169,10 +180,13 @@ public class M_PlayerController : MonoBehaviour
         
         // if we are getting movement input
         // turn the character to face the direction of movement
+        // also turn the camera if applicable
         if (input.magnitude > 0 && !zeroMovement)
         {
             Quaternion rot = Quaternion.LookRotation(intent);
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, turnSpeed * Time.deltaTime);
+            Quaternion camRot = Quaternion.Slerp(cam.transform.rotation, rot, turnSpeed * Time.deltaTime);
+            camAngles = camRot.eulerAngles;
         }
         
         // seperate out the y component of velocity so that it does not affect our XZ movement
@@ -209,7 +223,7 @@ public class M_PlayerController : MonoBehaviour
     // but only if the character is grounded
     void DoJump()
     {
-        if (grounded && Input.GetButtonDown("Jump"))
+        if (!zeroMovement && grounded && jumpInput)
         {
             doRaycast = false;
             velocity.y = jumpVelocity;
@@ -226,32 +240,22 @@ public class M_PlayerController : MonoBehaviour
     }*/
     void HandleMovement()
     {
-        zeroVelocityXZ(); // zero velocity if zeroMovement is true
+        // zero velocity if zeroMovement is true
+        if (zeroMovement)
+        {
+            velocity.x = 0;
+            velocity.z = 0;
+        }
         Vector3 timedVelocity = velocity * Time.deltaTime;
         controller.Move(timedVelocity);
         timedVelocity.y = 0;
         animator.SetFloat("MoveSpeed", timedVelocity.magnitude * 10);
     }
 
-    // public void StopMovement()
-    // {
-    //     animator.SetFloat("MoveSpeed", 0);
-    //     this.enabled = false;
-    // }
-    void zeroVelocityXZ()
+    public void StopMovement()
     {
-        if(zeroMovement)
-        {
-            velocity.x = 0;
-            velocity.z = 0;
-            canJump = false;
-           
-        }
-        else
-        {
-            canJump = true;
-            
-        }
+        animator.SetFloat("MoveSpeed", 0);
+        this.enabled = false;
     }
     
     void OnTriggerEnter(Collider collision) 
@@ -259,7 +263,6 @@ public class M_PlayerController : MonoBehaviour
     	if (collision.tag == "Bounce"){
     		
     		velocity.y = bounceVelocity;
-            Debug.Log("Bounce " + velocity.y);
     		doRaycast = false;
     	}
     	 

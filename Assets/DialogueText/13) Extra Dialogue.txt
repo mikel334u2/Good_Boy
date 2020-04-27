@@ -1,0 +1,19 @@
+[NAME=Beeatrice][IMG=Dialogue/bee]
+Ha! You sly dog! Thought you could just sneak outta the game? Unbeelievable!
+''
+[NAME=Cooper][IMG=Dialogue/cooper]
+Sorry friend! I was just following your advice and exploring the world!
+''
+[NAME=Beeatrice][IMG=Dialogue/bee]
+...Gah! I can't even fault you for that. No need to beet yourself up!
+''
+Go ahead! Explore the great expanse of nothing. And when you're done buzzing around, just fall off the edge!
+''
+[NAME=Cooper][IMG=Dialogue/cooper_confused]
+...?
+''
+[NAME=Beeatrice][IMG=Dialogue/bee]
+Hahaha don't bee dramatic! Of course you'll respawn!
+''
+If you need me, I'm only a buzz away. See ya later!
+[DESTROY]
