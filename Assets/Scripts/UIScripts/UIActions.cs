@@ -36,7 +36,7 @@ public class UIActions : MonoBehaviour
 
     void Start()
     {
-        if (!PlayerInfo.Player.TryGetComponent<M_PlayerController>(out m_controller))
+        if (PlayerInfo.Player != null && !PlayerInfo.Player.TryGetComponent<M_PlayerController>(out m_controller))
             Debug.LogError("Attach a player controller to player");
         if (!Camera.main.TryGetComponent<M_Camera>(out m_camera))
             Debug.LogError("Attach M_Camera to main camera");

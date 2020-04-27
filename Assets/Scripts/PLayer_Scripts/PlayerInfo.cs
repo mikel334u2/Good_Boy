@@ -72,7 +72,8 @@ public class PlayerInfo : MonoBehaviour
         }
         respawn = GameObject.FindGameObjectWithTag("Respawn");
         // questText.gameObject.SetActive(false);
-        transform.position = respawn.transform.position;
+        if (respawn != null)
+            transform.position = respawn.transform.position;
 
         keyMap = new Dictionary<GameObject, GameObject>();
         for (int i = 0; i < keyImages.Length; i++)
