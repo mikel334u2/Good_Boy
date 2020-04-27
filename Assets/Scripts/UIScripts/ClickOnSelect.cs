@@ -21,7 +21,8 @@ public class ClickOnSelect : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (button != null && button.gameObject.activeInHierarchy && !selectWithoutClicking)
+        Debug.Log("GameObject: " + gameObject.name + "\nSelect w/o clicking" + selectWithoutClicking);
+        if (button != null && gameObject.activeInHierarchy && !selectWithoutClicking)
             button.onClick.Invoke();
         selectWithoutClicking = false;
     }

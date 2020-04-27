@@ -15,6 +15,7 @@ public class UIActions : MonoBehaviour
     [SerializeField] private List<Button> tabButtons;
     [SerializeField] private Button bookButton;
     [SerializeField] private Button hiddenGearButton;
+    [SerializeField] private string creditsSceneName = "Good_Boy_Updated";
     private int index = -1;
     [HideInInspector] public bool paused = false;
     private bool zm = true;
@@ -40,6 +41,12 @@ public class UIActions : MonoBehaviour
             Debug.LogError("Attach a player controller to player");
         if (!Camera.main.TryGetComponent<M_Camera>(out m_camera))
             Debug.LogError("Attach M_Camera to main camera");
+        StartCoroutine("HideObjects");
+    }
+
+    IEnumerator HideObjects()
+    {
+        yield return null;
         foreach (GameObject go in UIToHide)
             go.SetActive(false);
     }
@@ -74,10 +81,15 @@ public class UIActions : MonoBehaviour
             controls.Player.TabLeft.started += _ => TabLeft();
             controls.Player.TabRight.started += _ => TabRight();
         }
-        controls.Player.Menu.performed += _ => InvokeOnClick(bookButton);
+        controls.Player.Menu.performed += _ =>
+        {
+            if (SceneManager.GetActiveScene().name == creditsSceneName)
+                Application.Quit();
+            else
+                InvokeOnClick(bookButton);
+        };
         controls.UI.Cancel.performed += _ => Application.Quit();
     }
-
 
     // PUBLIC FUNCTIONS ------------------------------------------------------
 
@@ -144,7 +156,8 @@ public class UIActions : MonoBehaviour
     public void SelectFirstChild(GameObject parent)
     {
         Selectable s = parent.GetComponentInChildren<Selectable>();
-        if (s != null && EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+        // Debug.Log(s.name);
+        if (s != null && s.gameObject.activeInHierarchy)
         {
             IEnumerator function = SelectLater(s);
             StartCoroutine(function);
@@ -157,7 +170,13 @@ public class UIActions : MonoBehaviour
             index = 0;
         else
             index = (index + 1) % tabButtons.Count;
-        tabButtons[index].onClick.Invoke();
+        if (tabButtons[index].gameObject.activeInHierarchy)
+        {
+            Debug.Log(tabButtons[index].name);
+            IEnumerator function = SelectLater(tabButtons[index]);
+            StartCoroutine(function);
+            tabButtons[index].onClick.Invoke();
+        }
     }
 
     public void TabLeft()
@@ -170,13 +189,21 @@ public class UIActions : MonoBehaviour
             if (index < 0)
                 index += tabButtons.Count;
         }
-        tabButtons[index].onClick.Invoke();
+        if (tabButtons[index].gameObject.activeInHierarchy)
+        {
+            Debug.Log(tabButtons[index].name);
+            IEnumerator function = SelectLater(tabButtons[index]);
+            StartCoroutine(function);
+        }
     }
 
     public IEnumerator SelectLater(Selectable selectable)
     {
-        yield return null;
-        selectable.Select();
-        // EventSystem.current.SetSelectedGameObject(selectable.gameObject);
+        while (EventSystem.current.alreadySelecting)
+        {
+            yield return null;
+        }
+        EventSystem.current.SetSelectedGameObject(selectable.gameObject);
+        // Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject);
     }
 }
